@@ -13,52 +13,64 @@ import Typography from "@mui/material/Typography";
 import NavItems from "./NavItems";
 import { useNavigate } from "react-router-dom";
 
+
 const drawerWidth = 240;
 const dashboardOptions = [
   {
     name: "Dashboard",
     icon: "dashboard",
     path: "/",
+    children: false,
   },
   {
     name: "2 Wheelers",
     icon: "electric_moped",
     path: "/two_wheelers",
+    children: false,
   },
   {
     name: "4 Wheelers/Cars",
     icon: "electric_car",
     path: "/four_wheelers",
+    children: false,
   },
   {
     name: "Brands",
     icon: "storefront",
     path: "/brands",
+    children: false,
   },
   {
     name: "Posts",
     icon: "article",
     path: "/posts",
+    children: true,
+    childs: ["All posts", "Videos", "Manage categories", "Manage tags"]
   },
   {
-    name: "User list",
+    name: "Users",
     icon: "group",
     path: "/user_list",
+    children: true,
+    childs: ["User list", "Manage Reviews"]
   },
   {
     name: "Enquiries",
     icon: "contact_support",
     path: "/enquiry",
+    children: false,
   },
   {
     name: "Loan applications",
     icon: "request_page",
     path: "/loan_application",
+    children: false,
   },
   {
     name: "Lease applications",
     icon: "contract",
     path: "/lease_application",
+    children: false,
   },
 ];
 
@@ -87,6 +99,8 @@ function ResponsiveDrawer(props) {
     }
   };
 
+
+
   const drawer = (
     <div>
       {/* <Toolbar /> */}
@@ -104,12 +118,17 @@ function ResponsiveDrawer(props) {
       {/* <Divider /> */}
       {dashboardOptions.map((item, index) => {
         return (
-          <NavItems
-            key={item.name}
-            item={item}
-            setCurrentMenuItem={setCurrentMenuItem}
-            currentMenuItem={currentMenuItem}
-          />
+          <>
+          
+               <NavItems
+               icon={item.children ? true: false}
+                  key={item.name}
+                  item={item}
+                  setCurrentMenuItem={setCurrentMenuItem}
+                  currentMenuItem={currentMenuItem}
+                />
+            
+          </>
         );
       })}
       <Box
@@ -328,6 +347,7 @@ function ResponsiveDrawer(props) {
           flexGrow: 1,
           padding: { md: "32px 24px 32px 32px", xs: "32px 16px 32px 16px" },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          overflow: "auto",
         }}
       >
         <Toolbar />

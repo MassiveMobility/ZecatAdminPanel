@@ -1,107 +1,31 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import { useState } from "react";
+import { Box, Typography } from "@mui/material";
 
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
+const CustomTab = ({ item }) => {
+  const [isActive, setIsActive] = useState(item[0].label);
 
+  const handleChangeActive = (val) => {
+    setIsActive(val)
+  }
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-CustomTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-const CustomTab = () => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  return (
-    <Box sx={{ width: { xs: "unset", md: "100%" }, overflow: "auto" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider", overflow: "auto" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
+    <Box display={"flex"} gap={"25px"} borderBottom={"1px solid #D7D7D7"} overflow={'auto'}>
+      {item.map((opt) => (
+        <Box
+          onClick={() => handleChangeActive(opt.label)}
+          pb={"6px"}
+          borderBottom={isActive === opt.label && "3px solid #2079ff"}
+          sx={{cursor: "pointer"}}
         >
-          <Tab
-            sx={{
-              color: "#575757",
-              fontSize: "16px",
-              fontFamily: "mySecondFont",
-            }}
-            label="Published "
-            {...a11yProps(0)}
-          />
-          <Tab
-            sx={{
-              color: "#575757",
-              fontSize: "16px",
-              fontFamily: "mySecondFont",
-            }}
-            label="Scheduled"
-            {...a11yProps(1)}
-          />
-          <Tab
-            sx={{
-              color: "#575757",
-              fontSize: "16px",
-              fontFamily: "mySecondFont",
-            }}
-            label="Drafts"
-            {...a11yProps(2)}
-          />
-          <Tab
-            sx={{
-              color: "#575757",
-              fontSize: "16px",
-              fontFamily: "mySecondFont",
-            }}
-            label="Trash"
-            {...a11yProps(3)}
-          />
-        </Tabs>
-      </Box>
-      <CustomTabPanel value={value} index={0}>
-        Item One
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        Item Four
-      </CustomTabPanel>
+          <Typography
+            px={"8px"}
+            py={"2px"}
+            color={isActive === opt.label ? "#575757" : "#727272"}
+            fontFamily={"mySecondFont"}
+          >
+            {opt.label}
+          </Typography>
+        </Box>
+      ))}
     </Box>
   );
 };

@@ -6,8 +6,8 @@ import "./App.css";
 
 function App() {
   let token = true;
-  const location = useLocation();
-  const newPath = location.pathname;
+  // const location = useLocation();
+  // const newPath = location.pathname;
 
   return (
     <div className="App">
@@ -18,11 +18,11 @@ function App() {
               key={item.path}
               path={item.path}
               element={
-                newPath === item.path ? (
+                // newPath === item.path ? (
                   <Layout>{item.element}</Layout>
-                ) : (
-                  item.element
-                )
+                // ) : (
+                //   item.element
+                // )
               }
             />
           ))

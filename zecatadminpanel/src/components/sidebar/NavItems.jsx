@@ -3,8 +3,14 @@ import React, { useState } from "react";
 import SidebarCSS from "./Sidebar.module.css";
 import { useNavigate } from "react-router-dom";
 
-const NavItems = ({ item, currentMenuItem, setCurrentMenuItem }) => {
+const NavItems = ({ item, currentMenuItem, setCurrentMenuItem, icon }) => {
   const navigate = useNavigate();
+  const [openChildren, setOpenChildren] = useState(false);
+
+  const handleOpenChildren = () => {
+    setOpenChildren(!openChildren);
+  };
+
   return (
     <>
       <Box
@@ -24,13 +30,18 @@ const NavItems = ({ item, currentMenuItem, setCurrentMenuItem }) => {
         <Box
           className={SidebarCSS.dashOptions}
           sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             padding: "12px 16px",
             marginLeft: "12px",
             marginBottom: "4px",
             marginRight: "16px",
             borderRadius: "8px",
             background:
-              currentMenuItem === item.name ? "#f4f8ff" : "transparent",
+              currentMenuItem === item.name && !icon
+                ? "#f4f8ff"
+                : "transparent",
           }}
           onClick={() => {
             setCurrentMenuItem(item.name);
@@ -58,8 +69,51 @@ const NavItems = ({ item, currentMenuItem, setCurrentMenuItem }) => {
             </span>
             {item.name}
           </Typography>
+          {icon && (
+            <Box sx={{ cursor: "pointer" }} onClick={handleOpenChildren}>
+              <span
+                className={`material-symbols-outlined ${
+                  openChildren
+                    ? SidebarCSS.iconRotate
+                    : SidebarCSS.iconRotateRemove
+                }`}
+              >
+                expand_more
+              </span>
+            </Box>
+          )}
         </Box>
       </Box>
+      {openChildren && (
+        <Box className={openChildren ? SidebarCSS.childrenSmoothness: ''} pl={"40px"} mt={"8px"}>
+          {item.childs.map((child) => (
+            <Box borderLeft={"1px solid rgba(47, 47, 47, 0.25)"}
+            pl={"10px"}
+            
+            >
+            <Typography
+            onClick={() => {
+              setCurrentMenuItem(child);
+              localStorage.setItem("menuItem", item.name);
+            }}
+              pl={'12px'}
+              color={"#2f2f2f"}
+              fontSize={"14px"}
+              fontFamily={"myThirdFont"}
+              textAlign={"start"}
+              py={'8px'}
+              sx={{cursor: "pointer"}}
+              bgcolor={ currentMenuItem === child
+                ? "#f4f8ff"
+                : "transparent"}
+             
+            >
+              {child}
+            </Typography>
+            </Box>
+          ))}
+        </Box>
+      )}
     </>
   );
 };

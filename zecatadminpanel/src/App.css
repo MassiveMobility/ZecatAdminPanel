@@ -64,6 +64,11 @@ body {
   color: #61dafb;
 }
 
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
+  height: 250px;
+  top: 272px !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

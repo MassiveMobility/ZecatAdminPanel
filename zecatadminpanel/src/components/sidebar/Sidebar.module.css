@@ -4,3 +4,19 @@
 .dashOptions:focus {
   background: #f4f8ff;
 } */
+
+
+.iconRotate{
+  transform: rotate(180deg);
+  transition: all  .3s ease-in-out;
+}
+
+.iconRotateRemove{
+  transform: rotate(360deg);
+  transition: all  .3s ease-in-out;
+
+}
+
+.childrenSmoothness{
+  transition: all 3s ease-in-out;
+}
