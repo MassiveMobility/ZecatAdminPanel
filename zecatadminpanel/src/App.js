@@ -4,6 +4,9 @@ import { allRoutes } from "./routes/routes";
 import Login from "./pages/login/Login";
 import "./App.css";
 
+import "rsuite/dist/rsuite.min.css";
+import "rsuite/dist/rsuite-no-reset.min.css";
+
 function App() {
   let token = true;
   // const location = useLocation();
@@ -19,7 +22,7 @@ function App() {
               path={item.path}
               element={
                 // newPath === item.path ? (
-                  <Layout>{item.element}</Layout>
+                <Layout>{item.element}</Layout>
                 // ) : (
                 //   item.element
                 // )

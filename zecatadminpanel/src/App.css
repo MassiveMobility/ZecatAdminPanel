@@ -77,3 +77,39 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* loan - calculator */
+.rs-slider-progress-bar {
+  background-color: #2079ff !important;
+  height: 8px !important;
+}
+.rs-slider-bar {
+  height: 8px !important;
+}
+.rs-slider-handle:before {
+  width: 32px !important;
+  height: 32px !important;
+  top: -8px;
+  background: #dadada !important;
+  box-shadow: 2px 2px 4px 0px rgba(255, 255, 255, 0.25) inset,
+    -2px -2px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  border: none !important;
+}
+.handle:hover .rs-tooltip {
+  background-color: #dadada;
+}
+.rs-input-number-btn-group-vertical {
+  display: none !important;
+}
+.rs-input {
+  background-color: "#f6f6f6" !important;
+}
+/* .rs-input-number > .rs-input {
+  padding: 0px !important;
+  text-align: end;
+  z-index: 0;
+  background: transparent;
+  border: "1px solid rgba(47, 47, 47, 0.25)";
+  font-size: 18px;
+  font-family: myThirdFont;
+} */
