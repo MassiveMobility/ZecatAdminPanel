@@ -1,7 +1,7 @@
-import { Box, MenuItem, Select, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const BrandModalCard = () => {
+const VariantNamePriceCard = () => {
   const [age, setAge] = useState("");
 
   const handleChange = (event) => {
@@ -24,7 +24,7 @@ const BrandModalCard = () => {
         fontFamily={"mySecondFont"}
         textAlign={"start"}
       >
-        Brand & Modal
+        Variant name & price
       </Typography>
       <Box
         sx={{
@@ -48,31 +48,22 @@ const BrandModalCard = () => {
             fontFamily={"myThirdFont"}
             color={"#2f2f2f"}
           >
-            Brand
+            Variant name
           </Typography>
 
-          <Select
-            fullWidth
-            value={age}
-            onChange={handleChange}
-            displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-            sx={{
+          <input
+            style={{
+              height: "56px",
+              padding: "12px 16px",
               borderRadius: "8px",
-              "& .MuiSelect-select": {
-                textAlign: "start",
-              },
+              border: "1px solid rgba(47, 47, 47, 0.25)",
+              outline: "none",
+              fontSize: "16px",
+              fontFamily: "myFourthFont",
             }}
-          >
-            <MenuItem value="">
-              <em style={{ fontStyle: "normal", color: "#7a7a7a" }}>
-                Select the Brand
-              </em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+            type="text"
+            placeholder="Enter the model name here"
+          />
         </Box>
         <Box
           sx={{
@@ -88,7 +79,7 @@ const BrandModalCard = () => {
             fontFamily={"myThirdFont"}
             color={"#2f2f2f"}
           >
-            Model Name
+            Price (Ex-showroom)
           </Typography>
           <input
             style={{
@@ -109,4 +100,4 @@ const BrandModalCard = () => {
   );
 };
 
-export default BrandModalCard;
+export default VariantNamePriceCard;

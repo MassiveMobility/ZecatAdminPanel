@@ -23,22 +23,7 @@ const KeySpecs = () => {
     },
   ];
   return (
-    <Box
-      sx={{
-        background: "#fff",
-        padding: "24px",
-        borderRadius: "12px",
-      }}
-    >
-      <Typography
-        color={"#1b1b1b"}
-        fontSize={"18px"}
-        fontFamily={"mySecondFont"}
-        textAlign={"start"}
-      >
-        Key Specs
-      </Typography>
-
+    <>
       {/*------ heading ------*/}
       <Box
         sx={{
@@ -66,7 +51,7 @@ const KeySpecs = () => {
             fontSize={"14px"}
             fontFamily={"myThirdFont"}
           >
-            Specification
+            Specification/ feature name
           </Typography>
         </Box>
         <Box display={"flex"} width={"50%"}>
@@ -170,7 +155,7 @@ const KeySpecs = () => {
           );
         })}
       </Box>
-    </Box>
+    </>
   );
 };
 

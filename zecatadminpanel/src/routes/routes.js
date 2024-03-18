@@ -9,6 +9,7 @@ import LoanApplicationPage from "../pages/LoanApplicationPage/LoanApplicationPag
 import LeaseApplicationPage from "../pages/LeaseApplicationPage/LeaseApplicationPage";
 import Settings from "../pages/Settings/Settings";
 import AddTwoWheeler from "../pages/TwoWheelerPage/AddTwoWheeler";
+import AddVariant from "../pages/AddVariant/AddVariant";
 
 export const allRoutes = [
   {
@@ -22,6 +23,10 @@ export const allRoutes = [
   {
     path: "/two_wheelers/:id",
     element: <AddTwoWheeler />,
+  },
+  {
+    path: "/two_wheelers/:id/:id",
+    element: <AddVariant />,
   },
   {
     path: "/four_wheelers",
