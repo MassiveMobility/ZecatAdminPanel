@@ -15,6 +15,7 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
     const updatedImgs = allImages.filter((upd) => upd.img !== img);
     setAllImages(updatedImgs);
   };
+
   return (
     <Box
       sx={{
@@ -41,47 +42,44 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
         />
       </Box>
       <Box display={"flex"} width={"40%"}>
-
-        {features ?
-       <input
-       value={feat}
-       onChange={(e) => setFeat(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "12px 16px",
-          borderRadius: "8px",
-          border: "1px solid rgba(47, 47, 47, 0.25)",
-          outline: "none",
-          height: "64px",
-        }}
-        type="text"
-      /> 
-      :
-        <Select
-          fullWidth
-          value={tag}
-          onChange={handleChange}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{
-            borderRadius: "8px",
-            height: "40px",
-            "& .MuiSelect-select": {
-              textAlign: "start",
-            },
-          }}
-        >
-         
-          {imageTag.map((newitem, index) => {
-            return (
-              <MenuItem value={newitem} key={index}>
-                <Typography p={"12px"}>{newitem}</Typography>
-              </MenuItem>
-            );
-          })}
-        </Select>
-           }
-
+        {features ? (
+          <input
+            value={feat}
+            onChange={(e) => setFeat(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              border: "1px solid rgba(47, 47, 47, 0.25)",
+              outline: "none",
+              height: "64px",
+            }}
+            type="text"
+          />
+        ) : (
+          <Select
+            fullWidth
+            value={tag}
+            onChange={handleChange}
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+            sx={{
+              borderRadius: "8px",
+              height: "40px",
+              "& .MuiSelect-select": {
+                textAlign: "start",
+              },
+            }}
+          >
+            {imageTag.map((newitem, index) => {
+              return (
+                <MenuItem value={newitem} key={index}>
+                  <Typography p={"12px"}>{newitem}</Typography>
+                </MenuItem>
+              );
+            })}
+          </Select>
+        )}
       </Box>
       <Box
         display={"flex"}

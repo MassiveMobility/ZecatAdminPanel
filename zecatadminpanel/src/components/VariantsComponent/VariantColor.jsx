@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import VariantColorImgMap from "./VariantColorImgMap";
 
 const VariantColor = () => {
   const [overviewImage, setOverviewImage] = useState("");
@@ -9,9 +10,13 @@ const VariantColor = () => {
   const [colorName, setColorName] = useState("");
   const [colorCode, setColorCode] = useState("");
   const [editData, setEditData] = useState(false);
+  const [addData, setAddData] = useState(true);
 
   const handleEditData = () => {
     setEditData(!editData);
+  };
+  const handleAddData = () => {
+    setAddData(!addData);
   };
 
   let { acceptedFiles, getRootProps, getInputProps } = useDropzone({
@@ -64,6 +69,8 @@ const VariantColor = () => {
       setColorCode(obj.color_code);
       setOverviewImage("");
       setColorName("");
+      setColorCode("");
+      setAddData(false);
       setLinks("");
     }
   }, [overviewImage, colorName, colorCode]);
@@ -98,6 +105,7 @@ const VariantColor = () => {
             fontFamily: "mySecondFont",
             color: "#2079FF",
           }}
+          onClick={handleAddData}
         >
           <span
             class="material-symbols-outlined"
@@ -182,103 +190,13 @@ const VariantColor = () => {
           >
             {allImages.map((item, index) => {
               return (
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "36px",
-                  }}
-                >
-                  <Box sx={{ display: "flex", width: "5%" }}>
-                    <Typography fontSize={"14px"} fontFamily={"mySecondFont"}>
-                      {index + 1}
-                    </Typography>
-                  </Box>
-                  <Box display={"flex"} width={"10%"}>
-                    <img src={item.img} alt="" />
-                  </Box>
-                  <Box display={"flex"} width={"35%"}>
-                    <Typography fontSize={"16px"} fontFamily={"mySecondFont"}>
-                      {item.color_name}
-                    </Typography>
-                  </Box>
-                  <Box
-                    display={"flex"}
-                    width={"25%"}
-                    gap={"8px"}
-                    alignItems={"center"}
-                    textTransform={"uppercase"}
-                  >
-                    <Box
-                      sx={{
-                        background: item.color_code,
-                        width: "32px",
-                        height: "32px",
-                        borderRadius: "32px",
-                      }}
-                    ></Box>
-                    <Typography fontSize={"16px"} fontFamily={"mySecondFont"}>
-                      {item.color_code}
-                    </Typography>
-                  </Box>
-                  <Box display={"flex"} width={"25%"} gap={"4px"}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: "4px",
-                        padding: "4px",
-                        border: "1px solid #D0D0D0",
-                        cursor: "pointer",
-                      }}
-                      onClick={handleEditData}
-                    >
-                      <span
-                        style={{ color: "#2079FF", fontWeight: "300" }}
-                        class="material-symbols-outlined"
-                      >
-                        edit
-                      </span>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: "4px",
-                        padding: "4px",
-                        border: "1px solid #D0D0D0",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <span
-                        style={{ color: "#2F2F2F", fontWeight: "300" }}
-                        class="material-symbols-outlined"
-                      >
-                        visibility
-                      </span>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: "4px",
-                        padding: "4px",
-                        border: "1px solid #D0D0D0",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <span
-                        style={{ color: "#700000", fontWeight: "300" }}
-                        class="material-symbols-outlined"
-                      >
-                        delete
-                      </span>
-                    </Box>
-                  </Box>
-                </Box>
+                <VariantColorImgMap
+                  item={item}
+                  index={index}
+                  handleEditData={handleEditData}
+                  allImages={allImages}
+                  setAllImages={setAllImages}
+                />
               );
             })}
           </Box>
@@ -425,127 +343,135 @@ const VariantColor = () => {
       )}
 
       {/* drag n drop section */}
-      <Box
-        sx={{
-          marginTop: "24px",
-        }}
-      >
-        <Grid
-          container
-          columnSpacing={"40px"}
-          sx={{ display: { xs: "block", md: "flex" } }}
+      {addData === true ? (
+        <Box
+          sx={{
+            marginTop: "24px",
+          }}
         >
-          <Grid item md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          <Grid
+            container
+            columnSpacing={"40px"}
+            sx={{ display: { xs: "block", md: "flex" } }}
+          >
+            <Grid item md={4}>
               <Box
-                sx={{
-                  // maxWidth: "240px",
-                  width: "100%",
-                  height: "160px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  border: "1px dashed #c7ddff",
-                  borderRadius: "4px",
-                  padding: "32px 18px",
-                  cursor: "pointer",
-                }}
+                sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
               >
-                <section className="container">
-                  <div {...getRootProps({ className: "dropzone" })}>
-                    <input {...getInputProps()} />
-                    <span
-                      style={{
-                        fontSize: "48px",
-                        color: "rgba(32, 121, 255, 0.75)",
-                        fontWeight: "300",
-                      }}
-                      className="material-symbols-outlined"
-                    >
-                      cloud_upload
-                    </span>
-                    <Typography
-                      fontSize={"14px"}
-                      fontFamily={"myThirdFont"}
-                      color={"#2f2f2f"}
-                      sx={{ textWrap: "nowrap" }}
-                    >
-                      Drop your images here or select
-                    </Typography>
-                    <Typography
-                      color={"#2079FF"}
-                      fontSize={"14px"}
-                      fontFamily={"myThirdFont"}
-                      sx={{ textDecoration: "underline" }}
-                    >
-                      click to browse
-                    </Typography>
-                  </div>
-                </section>
-              </Box>
-              <Box>
-                <aside>
-                  <ul style={{ textAlign: "left" }}>{newFiles}</ul>
-                </aside>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item md={8}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-              <Box>
-                <input
-                  value={colorName}
-                  onChange={handleColorName}
-                  style={{
-                    width: "100%",
-                    height: "56px",
-                    padding: "12px 16px",
-                    borderRadius: "8px",
-                    border: "1px solid rgba(47, 47, 47, 0.25)",
-                    outline: "none",
-                    fontSize: "16px",
-                    fontFamily: "myFourthFont",
-                  }}
-                  type="text"
-                  placeholder="Enter the color name here"
-                />
-              </Box>
-              <Box sx={{ display: "flex", gap: "8px" }}>
-                <input
-                  value={colorCode}
-                  onChange={handleColorCode}
-                  style={{
-                    width: "100%",
-                    height: "56px",
-                    padding: "12px 16px",
-                    borderRadius: "8px",
-                    border: "1px solid rgba(47, 47, 47, 0.25)",
-                    outline: "none",
-                    fontSize: "16px",
-                    fontFamily: "myFourthFont",
-                  }}
-                  type="text"
-                  placeholder="# Hex code"
-                />
-                <Button
+                <Box
                   sx={{
-                    padding: "8px 16px",
-                    border: "1px solid #2079FF",
-                    borderRadius: "8px",
-                    fontFamily: "mySecondFont",
-                    color: "#2079FF",
-                    maxWidth: "114px",
+                    // maxWidth: "240px",
                     width: "100%",
+                    height: "160px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "1px dashed #c7ddff",
+                    borderRadius: "4px",
+                    padding: "32px 18px",
+                    cursor: "pointer",
                   }}
-                  onClick={handleImages}
                 >
-                  ADD
-                </Button>
+                  <section className="container">
+                    <div {...getRootProps({ className: "dropzone" })}>
+                      <input {...getInputProps()} />
+                      <span
+                        style={{
+                          fontSize: "48px",
+                          color: "rgba(32, 121, 255, 0.75)",
+                          fontWeight: "300",
+                        }}
+                        className="material-symbols-outlined"
+                      >
+                        cloud_upload
+                      </span>
+                      <Typography
+                        fontSize={"14px"}
+                        fontFamily={"myThirdFont"}
+                        color={"#2f2f2f"}
+                        sx={{ textWrap: "nowrap" }}
+                      >
+                        Drop your images here or select
+                      </Typography>
+                      <Typography
+                        color={"#2079FF"}
+                        fontSize={"14px"}
+                        fontFamily={"myThirdFont"}
+                        sx={{ textDecoration: "underline" }}
+                      >
+                        click to browse
+                      </Typography>
+                    </div>
+                  </section>
+                </Box>
+                <Box>
+                  <aside>
+                    <ul style={{ textAlign: "left" }}>{newFiles}</ul>
+                  </aside>
+                </Box>
               </Box>
-            </Box>
+            </Grid>
+            <Grid item md={8}>
+              <Box
+                sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              >
+                <Box>
+                  <input
+                    value={colorName}
+                    onChange={handleColorName}
+                    style={{
+                      width: "100%",
+                      height: "56px",
+                      padding: "12px 16px",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(47, 47, 47, 0.25)",
+                      outline: "none",
+                      fontSize: "16px",
+                      fontFamily: "myFourthFont",
+                    }}
+                    type="text"
+                    placeholder="Enter the color name here"
+                  />
+                </Box>
+                <Box sx={{ display: "flex", gap: "8px" }}>
+                  <input
+                    value={colorCode}
+                    onChange={handleColorCode}
+                    style={{
+                      width: "100%",
+                      height: "56px",
+                      padding: "12px 16px",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(47, 47, 47, 0.25)",
+                      outline: "none",
+                      fontSize: "16px",
+                      fontFamily: "myFourthFont",
+                    }}
+                    type="text"
+                    placeholder="# Hex code"
+                  />
+                  <Button
+                    sx={{
+                      padding: "8px 16px",
+                      border: "1px solid #2079FF",
+                      borderRadius: "8px",
+                      fontFamily: "mySecondFont",
+                      color: "#2079FF",
+                      maxWidth: "114px",
+                      width: "100%",
+                    }}
+                    onClick={handleImages}
+                  >
+                    ADD
+                  </Button>
+                </Box>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      ) : (
+        ""
+      )}
     </Box>
   );
 };

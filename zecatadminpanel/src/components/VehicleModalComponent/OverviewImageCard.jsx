@@ -2,6 +2,7 @@ import { Box, Select, Typography, MenuItem, Grid, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import ImagesMap from "./ImagesMap";
+import Dropbox from "../dropbox/Dropbox";
 
 const OverviewImageCard = ({ standOutFeatures = false }) => {
   const [overviewImage, setOverviewImage] = useState([]);
@@ -116,34 +117,32 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
         </Box>
       </Box>
       {/*------ data ------*/}
-     
-          {allImages.length > 0 && 
-            <Box
-              sx={{
-                marginTop: "18px",
-                padding: "8px 8px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "32px",
-                overflow: "auto",
-              }}
-            >
-              {allImages.map((item, index) => {
-                return (
-                  <ImagesMap
-                    key={index}
-                    item={item}
-                    id={index}
-                    setAllImages={setAllImages}
-                    allImages={allImages}
-                    features={features}
-                  />
-                );
-              })}
-            </Box>
-          }
-     
-      
+
+      {allImages.length > 0 && (
+        <Box
+          sx={{
+            marginTop: "18px",
+            padding: "8px 8px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "32px",
+            overflow: "auto",
+          }}
+        >
+          {allImages.map((item, index) => {
+            return (
+              <ImagesMap
+                key={index}
+                item={item}
+                id={index}
+                setAllImages={setAllImages}
+                allImages={allImages}
+                features={features}
+              />
+            );
+          })}
+        </Box>
+      )}
 
       {/* drag n drop section */}
       <Box
@@ -157,7 +156,8 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
           sx={{ display: { xs: "block", md: "flex" } }}
         >
           <Grid item md={standOutFeatures ? 4 : 12}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <Dropbox />
+            {/* <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               <Box
                 sx={{
                   // maxWidth: "240px",
@@ -209,7 +209,7 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
                   <ul style={{ textAlign: "left" }}>{newFiles}</ul>
                 </aside>
               </Box>
-            </Box>
+            </Box> */}
           </Grid>
           {standOutFeatures && (
             <Grid item md={8}>
