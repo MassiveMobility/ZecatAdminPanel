@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   MenuItem,
-  Pagination,
   Select,
   Typography,
 } from "@mui/material";
@@ -17,13 +16,20 @@ import {
 import SearchInput from "../../components/Inputs/SearchInput";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import Sorting from "./Sorting";
+import {useNavigate} from "react-router-dom"
 
 const TwoWheelerPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
+  const navigate = useNavigate()
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
+
+
+  const handleAddModel= () => {
+    navigate(`add_model`)
+  }
 
  
   
@@ -122,6 +128,7 @@ const TwoWheelerPage = () => {
                 fontFamily: "mySecondFont",
                 color: "#2079FF",
               }}
+              onClick={handleAddModel}
             >
               <span
                 class="material-symbols-outlined"

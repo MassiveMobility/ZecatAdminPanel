@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddVariantCard = () => {
   const variantData = [
@@ -26,11 +27,17 @@ const AddVariantCard = () => {
     Array(variantData.length).fill(true)
   );
 
+  const navigate = useNavigate()
+
   const handleVisibility = (index) => {
     const newVisibilityStates = [...visibilityStates];
     newVisibilityStates[index] = !newVisibilityStates[index];
     setVisibilityStates(newVisibilityStates);
   };
+
+  const handleAddVariant = () => {
+    navigate('add_variant')
+  }
 
   return (
     <Box
@@ -50,6 +57,7 @@ const AddVariantCard = () => {
           Variants
         </Typography>
         <Button
+          onClick={handleAddVariant}
           sx={{
             padding: "8px 16px",
             border: "1px solid #2079FF",

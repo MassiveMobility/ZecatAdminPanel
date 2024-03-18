@@ -64,7 +64,7 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
         fontFamily={"mySecondFont"}
         textAlign={"start"}
       >
-        Overview Images
+       {standOutFeatures ? "Standout features" : "Overview Images"} 
       </Typography>
       {/*------ heading ------*/}
       <Box

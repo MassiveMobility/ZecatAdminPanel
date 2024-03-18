@@ -10,11 +10,9 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
     setTag(event.target.value);
   };
 
-  //   console.log(item);
 
   const handleDeleteImage = (img) => {
     const updatedImgs = allImages.filter((upd) => upd.img !== img);
-    // console.log(updatedImgs);
     setAllImages(updatedImgs);
   };
   return (
