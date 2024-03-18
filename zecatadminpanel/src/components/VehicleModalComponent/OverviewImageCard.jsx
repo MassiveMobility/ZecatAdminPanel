@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import ImagesMap from "./ImagesMap";
 
-const OverviewImageCard = (props) => {
-  const [overviewImage, setOverviewImage] = useState("");
+const OverviewImageCard = ({ standOutFeatures = false }) => {
+  const [overviewImage, setOverviewImage] = useState([]);
   const [allImages, setAllImages] = useState([]);
-  const [links, setLinks] = useState("");
+  const [features, setFeatures] = useState("");
+  const [files, setFiles] = useState([]);
 
   let { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     multiple: true,
   });
 
-  let newFiles = acceptedFiles.map((file) => {
+  let newFiles = files?.map((file) => {
     return (
       <li key={file.path}>
         {file.path} - {file.size}
@@ -21,41 +22,39 @@ const OverviewImageCard = (props) => {
   });
 
   const handleImages = () => {
-    let imageUrl;
-    const files = acceptedFiles.map((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        imageUrl = reader.result;
-        setOverviewImage(imageUrl);
-      };
-    });
-
-    if (links) {
-      imageUrl = links;
-      setOverviewImage(imageUrl);
+    if (files) {
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const imageUrl = reader.result;
+          setOverviewImage((prevImages) => [...prevImages, imageUrl]);
+        };
+      });
     }
-    // console.log(links);
-  };
-
-  const removeFiles = () => {
-    acceptedFiles = [];
-    newFiles = acceptedFiles;
-    console.log(newFiles);
+    // setFeatures("");
   };
 
   useEffect(() => {
-    if (overviewImage || links) {
-      const obj = {
-        img: overviewImage || links,
-      };
-      console.log(obj);
-      setAllImages([...allImages, obj]);
-      setOverviewImage("");
-      setLinks("");
-      removeFiles();
+    if (overviewImage.length > 0) {
+      const updatedAllImages = [];
+
+      for (let i = 0; i < overviewImage.length; i++) {
+        const obj = {
+          img: overviewImage[i],
+        };
+
+        updatedAllImages.push(obj);
+      }
+      setAllImages((prevImages) => [...prevImages, ...updatedAllImages]);
+      setOverviewImage([]);
+      setFiles([]);
     }
   }, [overviewImage]);
+
+  useEffect(() => {
+    setFiles(acceptedFiles);
+  }, [acceptedFiles]);
 
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>
@@ -117,32 +116,34 @@ const OverviewImageCard = (props) => {
         </Box>
       </Box>
       {/*------ data ------*/}
-      {allImages.length > 0 ? (
-        <Box
-          sx={{
-            marginTop: "18px",
-            padding: "8px 8px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "32px",
-            overflow: "auto",
-          }}
-        >
-          {allImages.map((item, index) => {
-            return (
-              <ImagesMap
-                key={index}
-                item={item}
-                id={index}
-                setAllImages={setAllImages}
-                allImages={allImages}
-              />
-            );
-          })}
-        </Box>
-      ) : (
-        ""
-      )}
+     
+          {allImages.length > 0 && 
+            <Box
+              sx={{
+                marginTop: "18px",
+                padding: "8px 8px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "32px",
+                overflow: "auto",
+              }}
+            >
+              {allImages.map((item, index) => {
+                return (
+                  <ImagesMap
+                    key={index}
+                    item={item}
+                    id={index}
+                    setAllImages={setAllImages}
+                    allImages={allImages}
+                    features={features}
+                  />
+                );
+              })}
+            </Box>
+          }
+     
+      
 
       {/* drag n drop section */}
       <Box
@@ -155,7 +156,7 @@ const OverviewImageCard = (props) => {
           columnSpacing={"40px"}
           sx={{ display: { xs: "block", md: "flex" } }}
         >
-          <Grid item md={4}>
+          <Grid item md={standOutFeatures ? 4 : 12}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               <Box
                 sx={{
@@ -210,48 +211,52 @@ const OverviewImageCard = (props) => {
               </Box>
             </Box>
           </Grid>
-          <Grid item md={8}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-              <Box>
-                <textarea
-                  value={links}
-                  onChange={(e) => setLinks(e.target.value)}
-                  style={{
-                    resize: "none",
-                    width: "100%",
-                    height: "120px",
-                    borderRadius: "8px",
-                    border: "1px solid #C4C4C4",
-                    outline: "none",
-                    padding: "12px",
-                  }}
-                  placeholder="Add image links here"
-                  type="text"
-                />
+          {standOutFeatures && (
+            <Grid item md={8}>
+              <Box
+                sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              >
+                <Box>
+                  <textarea
+                    value={features}
+                    onChange={(e) => setFeatures(e.target.value)}
+                    style={{
+                      resize: "none",
+                      width: "100%",
+                      height: "120px",
+                      borderRadius: "8px",
+                      border: "1px solid #C4C4C4",
+                      outline: "none",
+                      padding: "12px",
+                    }}
+                    placeholder="Enter Standout Features here"
+                    type="text"
+                  />
+                </Box>
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button
-                  sx={{
-                    padding: "4px 16px",
-                    border: "1px solid #2079FF",
-                    borderRadius: "8px",
-                    fontFamily: "mySecondFont",
-                    color: "#2079FF",
-                  }}
-                  onClick={handleImages}
-                >
-                  <span
-                    class="material-symbols-outlined"
-                    style={{ marginRight: "8px" }}
-                  >
-                    add
-                  </span>
-                  ADD
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
+            </Grid>
+          )}
         </Grid>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            sx={{
+              padding: "4px 16px",
+              border: "1px solid #2079FF",
+              borderRadius: "8px",
+              fontFamily: "mySecondFont",
+              color: "#2079FF",
+            }}
+            onClick={handleImages}
+          >
+            <span
+              class="material-symbols-outlined"
+              style={{ marginRight: "8px" }}
+            >
+              add
+            </span>
+            ADD
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

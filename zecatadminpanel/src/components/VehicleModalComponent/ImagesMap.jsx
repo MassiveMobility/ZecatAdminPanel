@@ -1,9 +1,10 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const ImagesMap = ({ item, id, setAllImages, allImages }) => {
+const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
   const imageTag = ["Overview", "Exterior", "Interior", "Steering"];
   const [tag, setTag] = useState(imageTag[0]);
+  const [feat, setFeat] = useState(features);
 
   const handleChange = (event) => {
     setTag(event.target.value);
@@ -42,7 +43,11 @@ const ImagesMap = ({ item, id, setAllImages, allImages }) => {
         />
       </Box>
       <Box display={"flex"} width={"40%"}>
-        {/* <input
+
+        {features ?
+       <input
+       value={feat}
+       onChange={(e) => setFeat(e.target.value)}
         style={{
           width: "100%",
           padding: "12px 16px",
@@ -51,9 +56,9 @@ const ImagesMap = ({ item, id, setAllImages, allImages }) => {
           outline: "none",
           height: "64px",
         }}
-        placeholder="Enter description here"
         type="text"
-      /> */}
+      /> 
+      :
         <Select
           fullWidth
           value={tag}
@@ -68,11 +73,7 @@ const ImagesMap = ({ item, id, setAllImages, allImages }) => {
             },
           }}
         >
-          {/* <MenuItem value="">
-            <em style={{ fontStyle: "normal", color: "#7a7a7a" }}>
-              Select the Brand
-            </em>
-          </MenuItem> */}
+         
           {imageTag.map((newitem, index) => {
             return (
               <MenuItem value={newitem} key={index}>
@@ -81,6 +82,8 @@ const ImagesMap = ({ item, id, setAllImages, allImages }) => {
             );
           })}
         </Select>
+           }
+
       </Box>
       <Box
         display={"flex"}

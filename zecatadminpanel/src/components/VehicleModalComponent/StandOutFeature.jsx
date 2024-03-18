@@ -4,7 +4,7 @@ import OverviewImageCard, { ImgOverViewLabel } from "./OverviewImageCard";
 const StandOutFeature = () => {
   return (
     <div>
-      <OverviewImageCard />
+      <OverviewImageCard standOutFeatures={true}/>
     </div>
   );
 };
