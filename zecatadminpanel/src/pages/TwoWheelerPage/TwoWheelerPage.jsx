@@ -1,8 +1,22 @@
-import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  MenuItem,
+  Pagination,
+  Select,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import CustomTab from "../../components/CustomTabs/CustomTab";
-import { addVehicleModeltabItems, allBrands } from "../../constants/mapItems";
+import {
+  addVehicleModeltabItems,
+  allBrands,
+  vehicleModelData,
+  vehicleModelTable,
+} from "../../constants/mapItems";
 import SearchInput from "../../components/Inputs/SearchInput";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import Sorting from "./Sorting";
 
 const TwoWheelerPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
@@ -10,6 +24,9 @@ const TwoWheelerPage = () => {
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
+
+ 
+  
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -30,15 +47,33 @@ const TwoWheelerPage = () => {
         }}
       >
         <CustomTab item={addVehicleModeltabItems} />
-        <Box mt={"24px"} display={"flex"} alignItems={"center"} gap={"12px"} justifyContent={'space-between'} flexWrap={'wrap'}>
-          <Box display={"flex"} alignItems={"center"} gap={'12px'} flexWrap={'wrap'}  width={{xs:'100%', md: "unset"}}>
-          {/*---------------------------------------- SEARCH INPUT--------------------------------------------- */}
-          <Box width={{xs: '100%', md: "400px"}}>
-            <SearchInput />
+        <Box
+          mt={"24px"}
+          display={"flex"}
+          alignItems={"center"}
+          gap={"12px"}
+          justifyContent={"space-between"}
+          flexWrap={"wrap"}
+        >
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            gap={"12px"}
+            flexWrap={"wrap"}
+            width={{ xs: "100%", md: "unset" }}
+          >
+            {/*---------------------------------------- SEARCH INPUT--------------------------------------------- */}
+            <Box width={{ xs: "100%", md: "400px" }}>
+              <SearchInput />
+            </Box>
+            {/*---------------------------------------- SORTING --------------------------------------------- */}
+
+            <Box>
+              <Sorting />
             </Box>
 
             {/*---------------------------------------- SELECT ALL BRANDS--------------------------------------------- */}
-            <Box width={{xs: '100%', md: "240px"}}>
+            <Box width={{ xs: "100%", md: "240px" }}>
               <Select
                 value={selectBrand}
                 onChange={handleSelectBrand}
@@ -98,6 +133,22 @@ const TwoWheelerPage = () => {
             </Button>
           </Box>
         </Box>
+
+        {/*---------------------------------------- TABLE --------------------------------------------- */}
+        <Box>
+          <Typography
+            mt={"12px"}
+            mb={"8px !important"}
+            color={"#2f2f2f"}
+            fontSize={"14px"}
+            fontFamily={"myFourthFont"}
+            textAlign={"left"}
+          >
+            Showing 1-10 of 80 vehicle models
+          </Typography>
+          <CustomTable headRow={vehicleModelTable} rowData={vehicleModelData} />
+        </Box>
+      
       </Box>
     </Box>
   );

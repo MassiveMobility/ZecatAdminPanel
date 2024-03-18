@@ -16,7 +16,7 @@ const SearchInput = () => {
           fontFamily: "myFourthFont",
         }}
       />
-      <Box position={'absolute'} top={10} right={10}>
+      <Box position={'absolute'} top={15} right={10}>
       <span class="material-symbols-outlined" style={{fontWeight: 200}}>search</span>
       </Box>
     </Box>
