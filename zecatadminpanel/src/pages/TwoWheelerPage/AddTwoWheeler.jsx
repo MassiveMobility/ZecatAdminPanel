@@ -4,6 +4,12 @@ import BrandModalCard from "../../components/VehicleModalComponent/BrandModalCar
 import PriceRangeCard from "../../components/VehicleModalComponent/PriceRangeCard";
 import AddVariantCard from "../../components/VehicleModalComponent/AddVariantCard";
 import OverviewImageCard from "../../components/VehicleModalComponent/OverviewImageCard";
+import StandOutFeature from "../../components/VehicleModalComponent/StandOutFeature";
+import KeySpecs from "../../components/VehicleModalComponent/KeySpecs";
+import PublishCard from "../../components/VehicleModalComponent/PublishCard";
+import ScheduleCard from "../../components/VehicleModalComponent/ScheduleCard";
+import TagsCard from "../../components/VehicleModalComponent/TagsCard";
+import DeleteModalCard from "../../components/VehicleModalComponent/DeleteModalCard";
 
 const AddTwoWheeler = () => {
   return (
@@ -17,17 +23,23 @@ const AddTwoWheeler = () => {
       >
         Add new 2 wheeler
       </Typography>
-      <Grid container>
+      <Grid container columnSpacing={"24px"} rowSpacing={"24px"}>
         <Grid item md={9}>
           <Box display={"flex"} flexDirection={"column"} gap={"24px"}>
             <BrandModalCard />
             <PriceRangeCard />
             <AddVariantCard />
             <OverviewImageCard />
+            {/* <KeySpecs /> */}
+            <StandOutFeature />
           </Box>
         </Grid>
+
         <Grid item md={3}>
-          Right
+          <PublishCard />
+          <ScheduleCard />
+          <TagsCard />
+          <DeleteModalCard />
         </Grid>
       </Grid>
     </Box>

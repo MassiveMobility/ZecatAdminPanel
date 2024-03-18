@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const AddVariantCard = () => {
   const variantData = [
@@ -10,18 +10,28 @@ const AddVariantCard = () => {
       price: "₹8.69 Lakh",
     },
     {
-      id: "1",
+      id: "2",
       variant: "Tiago EV XE Base",
       feature: "19.2kWh Battery, ABS with EBD ",
       price: "₹8.69 Lakh",
     },
     {
-      id: "1",
+      id: "3",
       variant: "Tiago EV XE Base",
       feature: "19.2kWh Battery, ABS with EBD ",
       price: "₹8.69 Lakh",
     },
   ];
+  const [visibilityStates, setVisibilityStates] = useState(
+    Array(variantData.length).fill(true)
+  );
+
+  const handleVisibility = (index) => {
+    const newVisibilityStates = [...visibilityStates];
+    newVisibilityStates[index] = !newVisibilityStates[index];
+    setVisibilityStates(newVisibilityStates);
+  };
+
   return (
     <Box
       sx={{
@@ -116,16 +126,20 @@ const AddVariantCard = () => {
           overflow: "auto",
         }}
       >
-        {variantData.map((item) => {
+        {variantData.map((item, index) => {
           return (
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: "16px",
+                gap: "10px",
               }}
             >
-              <Box sx={{ display: "flex", width: "5%" }}>{item.id}</Box>
+              <Box sx={{ display: "flex", width: "5%" }}>
+                <Typography fontSize={"14px"} fontFamily={"mySecondFont"}>
+                  {item.id}
+                </Typography>
+              </Box>
               <Box
                 display={"flex"}
                 sx={{ flexDirection: "column", gap: "4px" }}
@@ -206,13 +220,20 @@ const AddVariantCard = () => {
                     border: "1px solid #D0D0D0",
                     cursor: "pointer",
                   }}
+                  onClick={() => handleVisibility(index)}
                 >
-                  <span
-                    style={{ color: "#2F2F2F", fontWeight: "300" }}
-                    class="material-symbols-outlined"
-                  >
-                    visibility
-                  </span>
+                  {visibilityStates[index] ? (
+                    <span
+                      style={{ color: "#2F2F2F", fontWeight: "300" }}
+                      class="material-symbols-outlined"
+                    >
+                      visibility
+                    </span>
+                  ) : (
+                    <span class="material-symbols-outlined">
+                      visibility_off
+                    </span>
+                  )}
                 </Box>
                 <Box
                   sx={{
