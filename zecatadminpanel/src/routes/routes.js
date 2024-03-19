@@ -10,6 +10,7 @@ import LeaseApplicationPage from "../pages/LeaseApplicationPage/LeaseApplication
 import Settings from "../pages/Settings/Settings";
 import AddTwoWheeler from "../pages/TwoWheelerPage/AddTwoWheeler";
 import AddVariant from "../pages/AddVariant/AddVariant";
+import AddBrand from "../pages/AddBrand/AddBrand";
 
 export const allRoutes = [
   {
@@ -35,6 +36,10 @@ export const allRoutes = [
   {
     path: "/brands",
     element: <BrandsPage />,
+  },
+  {
+    path: "/brands/:id",
+    element: <AddBrand />,
   },
   {
     path: "/posts",

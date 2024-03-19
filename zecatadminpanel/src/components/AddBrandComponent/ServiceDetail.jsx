@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const VariantNamePriceCard = () => {
+const ServiceDetail = () => {
   return (
     <Box
       sx={{
@@ -19,7 +19,7 @@ const VariantNamePriceCard = () => {
         fontFamily={"mySecondFont"}
         textAlign={"start"}
       >
-        Variant name & price
+        Service details
       </Typography>
       <Box
         sx={{
@@ -43,7 +43,7 @@ const VariantNamePriceCard = () => {
             fontFamily={"myThirdFont"}
             color={"#2f2f2f"}
           >
-            Variant name
+            No. of Brand showrooms across India (optional)
           </Typography>
 
           <input
@@ -57,7 +57,7 @@ const VariantNamePriceCard = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter the model name here"
+            placeholder="Enter in number only"
           />
         </Box>
         <Box
@@ -74,7 +74,7 @@ const VariantNamePriceCard = () => {
             fontFamily={"myThirdFont"}
             color={"#2f2f2f"}
           >
-            Price (Ex-showroom)
+            No. of authorized service centers across India (optional)
           </Typography>
           <input
             style={{
@@ -87,7 +87,7 @@ const VariantNamePriceCard = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter the model name here"
+            placeholder="Enter in number only"
           />
         </Box>
       </Box>
@@ -95,4 +95,4 @@ const VariantNamePriceCard = () => {
   );
 };
 
-export default VariantNamePriceCard;
+export default ServiceDetail;
