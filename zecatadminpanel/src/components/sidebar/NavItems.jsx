@@ -11,6 +11,12 @@ const NavItems = ({ item, currentMenuItem, setCurrentMenuItem, icon }) => {
     setOpenChildren(!openChildren);
   };
 
+  const handleSetMenuItem = (child) => {
+    setCurrentMenuItem(child.title);
+    localStorage.setItem("menuItem", item.name);
+    navigate(child.path)
+  }
+
   return (
     <>
       <Box
@@ -25,7 +31,7 @@ const NavItems = ({ item, currentMenuItem, setCurrentMenuItem, icon }) => {
             currentMenuItem === item.name ? "4px solid #2079ff" : "none",
           borderTopLeftRadius: currentMenuItem === item.name ? "0px 8px" : "0",
         }}
-        onClick={() => navigate(item.path)}
+        onClick={() => navigate(item?.path)}
       >
         <Box
           className={SidebarCSS.dashOptions}
@@ -92,10 +98,7 @@ const NavItems = ({ item, currentMenuItem, setCurrentMenuItem, icon }) => {
             
             >
             <Typography
-            onClick={() => {
-              setCurrentMenuItem(child);
-              localStorage.setItem("menuItem", item.name);
-            }}
+            onClick={() => handleSetMenuItem(child)}
               pl={'12px'}
               color={"#2f2f2f"}
               fontSize={"14px"}
@@ -103,12 +106,12 @@ const NavItems = ({ item, currentMenuItem, setCurrentMenuItem, icon }) => {
               textAlign={"start"}
               py={'8px'}
               sx={{cursor: "pointer"}}
-              bgcolor={ currentMenuItem === child
+              bgcolor={ currentMenuItem === child.title
                 ? "#f4f8ff"
                 : "transparent"}
              
             >
-              {child}
+              {child.title}
             </Typography>
             </Box>
           ))}

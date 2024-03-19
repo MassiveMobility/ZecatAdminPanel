@@ -11,6 +11,7 @@ import Settings from "../pages/Settings/Settings";
 import AddTwoWheeler from "../pages/TwoWheelerPage/AddTwoWheeler";
 import AddVariant from "../pages/AddVariant/AddVariant";
 import AddBrand from "../pages/AddBrand/AddBrand";
+import AllPosts from "../pages/AllPosts/AllPosts";
 
 export const allRoutes = [
   {
@@ -64,6 +65,10 @@ export const allRoutes = [
   {
     path: "/setting",
     element: <Settings />,
+  },
+  {
+    path: "/all_posts",
+    element: <AllPosts />,
   },
   {
     path: "*",

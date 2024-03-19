@@ -43,16 +43,41 @@ const dashboardOptions = [
   {
     name: "Posts",
     icon: "article",
-    path: "/posts",
     children: true,
-    childs: ["All posts", "Videos", "Manage categories", "Manage tags"]
+    childs: [
+      {
+        title: "All posts",
+        path: "/all_posts"
+      },
+      {
+        title:  "Videos",
+        path: "/videos"
+      },
+      {
+        title: "Manage categories",
+        path: "/posts_categories"
+      },
+      {
+        title: "Manage tags",
+        path: "/posts_tags"
+      },
+    ]
   },
   {
     name: "Users",
     icon: "group",
-    path: "/user_list",
+    // path: "/user_list",
     children: true,
-    childs: ["User list", "Manage Reviews"]
+    childs: [
+      {
+        title: "User list",
+        path: "/all_user_list"
+      },
+      {
+        title: "Manage Reviews",
+        path: "/user_reviews"
+      },
+    ]
   },
   {
     name: "Enquiries",

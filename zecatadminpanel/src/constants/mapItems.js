@@ -278,3 +278,117 @@ export const brandModelData = [
  
   
 ]
+
+export const  postModelTable = [
+  {
+    header: 'Title',
+    field: 'title'
+  },
+  {
+    header: 'Author',
+    field: 'author'
+  },
+  {
+    header: 'Category',
+    field: 'category'
+  },
+  {
+    header: 'Tags',
+    field: 'tags'
+  },
+  {
+    header: 'Date Published',
+    field: 'date'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+export const postsModelData = [
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: '1C is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    author: 'Sahil gour',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  
+ 
+  
+]
