@@ -14,14 +14,6 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
     multiple: true,
   });
 
-  let newFiles = files?.map((file) => {
-    return (
-      <li key={file.path}>
-        {file.path} - {file.size}
-      </li>
-    );
-  });
-
   const handleImages = () => {
     if (files) {
       files.forEach((file) => {
@@ -33,7 +25,6 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
         };
       });
     }
-    // setFeatures("");
   };
 
   useEffect(() => {
@@ -53,9 +44,6 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
     }
   }, [overviewImage]);
 
-  useEffect(() => {
-    setFiles(acceptedFiles);
-  }, [acceptedFiles]);
 
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>
@@ -65,7 +53,7 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
         fontFamily={"mySecondFont"}
         textAlign={"start"}
       >
-       {standOutFeatures ? "Standout features" : "Overview Images"} 
+        {standOutFeatures ? "Standout features" : "Overview Images"}
       </Typography>
       {/*------ heading ------*/}
       <Box
@@ -156,60 +144,14 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
           sx={{ display: { xs: "block", md: "flex" } }}
         >
           <Grid item md={standOutFeatures ? 4 : 12}>
-            <Dropbox />
-            {/* <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-              <Box
-                sx={{
-                  // maxWidth: "240px",
-                  width: "100%",
-                  height: "160px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  border: "1px dashed #c7ddff",
-                  borderRadius: "4px",
-                  padding: "32px 18px",
-                  cursor: "pointer",
-                }}
-              >
-                <section className="container">
-                  <div {...getRootProps({ className: "dropzone" })}>
-                    <input {...getInputProps()} />
-                    <span
-                      style={{
-                        fontSize: "48px",
-                        color: "rgba(32, 121, 255, 0.75)",
-                        fontWeight: "300",
-                      }}
-                      className="material-symbols-outlined"
-                    >
-                      cloud_upload
-                    </span>
-                    <Typography
-                      fontSize={"14px"}
-                      fontFamily={"myThirdFont"}
-                      color={"#2f2f2f"}
-                      sx={{ textWrap: "nowrap" }}
-                    >
-                      Drop your images here or select
-                    </Typography>
-                    <Typography
-                      color={"#2079FF"}
-                      fontSize={"14px"}
-                      fontFamily={"myThirdFont"}
-                      sx={{ textDecoration: "underline" }}
-                    >
-                      click to browse
-                    </Typography>
-                  </div>
-                </section>
-              </Box>
-              <Box>
-                <aside>
-                  <ul style={{ textAlign: "left" }}>{newFiles}</ul>
-                </aside>
-              </Box>
-            </Box> */}
+            <Dropbox
+              acceptedFiles={acceptedFiles}
+              getInputProps={getInputProps}
+              getRootProps={getRootProps}
+              files={files}
+              setFiles={setFiles}
+            />
+           
           </Grid>
           {standOutFeatures && (
             <Grid item md={8}>

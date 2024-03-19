@@ -25,21 +25,27 @@ export const allBrands = [
 export const  vehicleModelTable = [
   {
     header: 'Vehicle model',
+    field: 'model'
   },
   {
-    header: 'Model ID'
+    header: 'Model ID',
+    field: 'id'
   },
   {
-    header: 'Brand'
+    header: 'Brand',
+    field: 'brand'
   },
   {
-    header: 'Variants'
+    header: 'Variants',
+    field: 'variants'
   },
   {
-    header: 'Status'
+    header: 'Status',
+    field: 'status'
   },
   {
-    header: 'Action'
+    header: 'Action',
+    field: 'action'
   },
 ]
 
@@ -205,5 +211,70 @@ export const vehicleModelData = [
     status: "live",
     action: ['edit', 'hide', 'delete']
   },
+  
+]
+
+
+export const  brandModelTable = [
+  {
+    header: 'Brand',
+    field: 'brand'
+  },
+  {
+    header: 'Brand ID',
+    field: 'id'
+  },
+  {
+    header: 'Category',
+    field: 'category'
+  },
+  {
+    header: 'Products listed',
+    field: 'total'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+export const brandModelData = [
+  {
+    brand: 'Tata',
+    id: '1212',
+    category: "4 wheeler",
+    total: 2,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    brand: 'Hyundai',
+    id: '13232',
+    category: "4 wheeler",
+    total: 8,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    brand: 'Maruti Suzuki',
+    id: '15562',
+    category: "4 wheeler",
+    total: 8,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    brand: 'Mahindra',
+    id: '1212',
+    category: "4 wheeler",
+    total: 12,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    brand: 'MG',
+    id: '1212',
+    category: "4 wheeler",
+    total: 6,
+    action: ['edit', 'hide', 'delete']
+  },
+  
+ 
   
 ]

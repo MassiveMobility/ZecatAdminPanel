@@ -2,15 +2,16 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import VariantColorImgMap from "./VariantColorImgMap";
+import Dropbox from "../dropbox/Dropbox";
 
 const VariantColor = () => {
   const [overviewImage, setOverviewImage] = useState("");
   const [allImages, setAllImages] = useState([]);
-  const [links, setLinks] = useState("");
   const [colorName, setColorName] = useState("");
   const [colorCode, setColorCode] = useState("");
   const [editData, setEditData] = useState(false);
   const [addData, setAddData] = useState(true);
+  const [files, setFiles] = useState([]);
 
   const handleEditData = () => {
     setEditData(!editData);
@@ -23,14 +24,6 @@ const VariantColor = () => {
     multiple: true,
   });
 
-  let newFiles = acceptedFiles.map((file) => {
-    return (
-      <li key={file.path}>
-        {file.path} - {file.size}
-      </li>
-    );
-  });
-
   const handleColorName = (event) => {
     setColorName(event.target.value);
   };
@@ -40,42 +33,36 @@ const VariantColor = () => {
   };
 
   const handleImages = () => {
-    let imageUrl;
-    const files = acceptedFiles.map((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        imageUrl = reader.result;
-        setOverviewImage(imageUrl);
-      };
-    });
-
-    if (links) {
-      imageUrl = links;
-      setOverviewImage(imageUrl);
+    if (files) {
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const imageUrl = reader.result;
+          setOverviewImage((prevImages) => [...prevImages, imageUrl]);
+        };
+      });
     }
+    setColorName(colorName);
+    setColorCode(colorCode);
+   
   };
 
   useEffect(() => {
-    if (overviewImage || links) {
+    if (overviewImage && colorCode && colorName) {
       const obj = {
-        img: overviewImage || links,
+        img: overviewImage,
         color_name: colorName,
         color_code: colorCode,
       };
-      console.log(obj);
-      setAllImages([...allImages, obj]);
-      setColorName(obj.color_name);
-      setColorCode(obj.color_code);
+      setAllImages((prevImages) =>  [...prevImages, obj]);
       setOverviewImage("");
       setColorName("");
       setColorCode("");
       setAddData(false);
-      setLinks("");
     }
-  }, [overviewImage, colorName, colorCode]);
+  }, [overviewImage]);
 
-  console.log(allImages);
 
   return (
     <Box
@@ -212,65 +199,14 @@ const VariantColor = () => {
                 sx={{ display: { xs: "block", md: "flex" } }}
               >
                 <Grid item md={4}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        // maxWidth: "240px",
-                        width: "100%",
-                        height: "160px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        border: "1px dashed #c7ddff",
-                        borderRadius: "4px",
-                        padding: "32px 18px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <section className="container">
-                        <div {...getRootProps({ className: "dropzone" })}>
-                          <input {...getInputProps()} />
-                          <span
-                            style={{
-                              fontSize: "48px",
-                              color: "rgba(32, 121, 255, 0.75)",
-                              fontWeight: "300",
-                            }}
-                            className="material-symbols-outlined"
-                          >
-                            cloud_upload
-                          </span>
-                          <Typography
-                            fontSize={"14px"}
-                            fontFamily={"myThirdFont"}
-                            color={"#2f2f2f"}
-                            sx={{ textWrap: "nowrap" }}
-                          >
-                            Drop your images here or select
-                          </Typography>
-                          <Typography
-                            color={"#2079FF"}
-                            fontSize={"14px"}
-                            fontFamily={"myThirdFont"}
-                            sx={{ textDecoration: "underline" }}
-                          >
-                            click to browse
-                          </Typography>
-                        </div>
-                      </section>
-                    </Box>
-                    <Box>
-                      <aside>
-                        <ul style={{ textAlign: "left" }}>{newFiles}</ul>
-                      </aside>
-                    </Box>
-                  </Box>
+                  <Dropbox
+                    acceptedFiles={acceptedFiles}
+                    getInputProps={getInputProps}
+                    getRootProps={getRootProps}
+                    files={files}
+                    setFiles={setFiles}
+                  />
+                
                 </Grid>
                 <Grid item md={8}>
                   <Box
@@ -355,61 +291,14 @@ const VariantColor = () => {
             sx={{ display: { xs: "block", md: "flex" } }}
           >
             <Grid item md={4}>
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
-              >
-                <Box
-                  sx={{
-                    // maxWidth: "240px",
-                    width: "100%",
-                    height: "160px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "1px dashed #c7ddff",
-                    borderRadius: "4px",
-                    padding: "32px 18px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <section className="container">
-                    <div {...getRootProps({ className: "dropzone" })}>
-                      <input {...getInputProps()} />
-                      <span
-                        style={{
-                          fontSize: "48px",
-                          color: "rgba(32, 121, 255, 0.75)",
-                          fontWeight: "300",
-                        }}
-                        className="material-symbols-outlined"
-                      >
-                        cloud_upload
-                      </span>
-                      <Typography
-                        fontSize={"14px"}
-                        fontFamily={"myThirdFont"}
-                        color={"#2f2f2f"}
-                        sx={{ textWrap: "nowrap" }}
-                      >
-                        Drop your images here or select
-                      </Typography>
-                      <Typography
-                        color={"#2079FF"}
-                        fontSize={"14px"}
-                        fontFamily={"myThirdFont"}
-                        sx={{ textDecoration: "underline" }}
-                      >
-                        click to browse
-                      </Typography>
-                    </div>
-                  </section>
-                </Box>
-                <Box>
-                  <aside>
-                    <ul style={{ textAlign: "left" }}>{newFiles}</ul>
-                  </aside>
-                </Box>
-              </Box>
+              <Dropbox
+                acceptedFiles={acceptedFiles}
+                getInputProps={getInputProps}
+                getRootProps={getRootProps}
+                files={files}
+                setFiles={setFiles}
+              />
+              
             </Grid>
             <Grid item md={8}>
               <Box

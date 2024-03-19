@@ -2,12 +2,8 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-const Dropbox = () => {
-  const [files, setFiles] = useState([]);
-  let { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    multiple: true,
-  });
-
+const Dropbox = ({acceptedFiles, getInputProps, getRootProps, files, setFiles}) => {
+ 
   let newFiles = files?.map((file) => {
     return (
       <li key={file.path}>
