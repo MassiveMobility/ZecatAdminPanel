@@ -70,7 +70,7 @@ const VariantAccordion = () => {
               {item.title}
             </AccordionSummary>
 
-            <AccordionDetails>
+            <AccordionDetails sx={{ padding: "0px" }}>
               {item.title === "Key specs" ? <KeySpecs /> : ""}
             </AccordionDetails>
           </Accordion>

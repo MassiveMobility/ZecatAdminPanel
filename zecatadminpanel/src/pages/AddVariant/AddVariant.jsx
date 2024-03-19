@@ -3,6 +3,8 @@ import { Box, Grid, Typography } from "@mui/material";
 import VariantNamePriceCard from "../../components/VariantsComponent/VariantNamePriceCard";
 import VariantSpecFeature from "../../components/VariantsComponent/VariantSpecFeature";
 import VariantColor from "../../components/VariantsComponent/VariantColor";
+import VariantStatus from "../../components/VariantsComponent/VariantStatus";
+import TagsCard from "../../components/VehicleModalComponent/TagsCard";
 const AddVariant = () => {
   return (
     <Box>
@@ -25,7 +27,8 @@ const AddVariant = () => {
         </Grid>
 
         <Grid item md={3}>
-          Right
+          <VariantStatus />
+          <TagsCard variantTags={true} />
         </Grid>
       </Grid>
     </Box>

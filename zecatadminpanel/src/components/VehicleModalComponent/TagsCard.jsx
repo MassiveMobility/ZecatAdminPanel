@@ -13,7 +13,7 @@ const filters = [
   "EV Review",
 ];
 
-const TagsCard = () => {
+const TagsCard = ({ variantTags = false }) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const handleSelectTags = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -39,7 +39,7 @@ const TagsCard = () => {
           fontFamily={"mySecondFont"}
           textAlign={"start"}
         >
-          Product Search Tags
+          {variantTags ? "Variant Tags" : "Product Search Tags"}
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
