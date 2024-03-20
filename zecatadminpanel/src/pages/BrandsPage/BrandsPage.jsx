@@ -37,7 +37,7 @@ const BrandsPage = () => {
     }}
   >
     <Box
-      mt={"24px"}
+      mt={"12px"}
       display={"flex"}
       alignItems={"center"}
       gap={"12px"}

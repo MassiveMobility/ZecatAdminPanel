@@ -1,13 +1,12 @@
-import { Box, Button, MenuItem, Select, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Button, Typography } from '@mui/material'
+import React from 'react'
 import CustomTab from '../../components/CustomTabs/CustomTab'
 import SearchInput from '../../components/Inputs/SearchInput'
-import Sorting from '../TwoWheelerPage/Sorting'
 import CustomTable from '../../components/CustomTable/CustomTable'
-import { addVehicleModeltabItems, allBrands, postModelTable, postsModelData, vehicleModelData, vehicleModelTable } from '../../constants/mapItems'
 import { useNavigate } from 'react-router-dom'
+import { addVehicleModeltabItems, videoModelData, videoModelTable } from '../../constants/mapItems'
 
-const AllPosts = () => {
+const AllVideos = () => {
     const postsTabs = addVehicleModeltabItems.filter((item) => item.label !== 'Scheduled')
     // const [selectBrand, setSelectBrand] = useState("");
     const navigate = useNavigate()
@@ -27,7 +26,7 @@ const AllPosts = () => {
       fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
       fontFamily={"mySecondFont"}
     >
-     All posts
+     Videos
     </Typography>
     <Box
       sx={{
@@ -123,7 +122,7 @@ const AllPosts = () => {
             >
               add
             </span>
-            ADD NEW POST
+            ADD NEW VIDEO
           </Button>
         </Box>
       </Box>
@@ -140,7 +139,7 @@ const AllPosts = () => {
         >
           Showing 1-10 of 80 vehicle models
         </Typography>
-        <CustomTable headRow={postModelTable} rowData={postsModelData} />
+        <CustomTable headRow={videoModelTable} rowData={videoModelData} />
       </Box>
     
     </Box>
@@ -148,4 +147,4 @@ const AllPosts = () => {
   )
 }
 
-export default AllPosts
+export default AllVideos

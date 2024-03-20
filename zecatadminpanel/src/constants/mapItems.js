@@ -388,6 +388,165 @@ export const postsModelData = [
     date: "20-10-2023",
     action: ['edit', 'hide', 'delete']
   },
+]
+
+export const  videoModelTable = [
+  {
+    header: 'Title',
+    field: 'title'
+  },
+  {
+    header: 'Category',
+    field: 'category'
+  },
+  {
+    header: 'Tags',
+    field: 'tags'
+  },
+  {
+    header: 'Date Published',
+    field: 'date'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+export const videoModelData = [
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: '1C is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    title: 'Zecat is the future',
+    category: "top category",
+    tags: "ev vehicles",
+    date: "20-10-2023",
+    action: ['edit', 'hide', 'delete']
+  },
+  
+ 
+  
+]
+export const  categoriesModelTable = [
+  {
+    header: 'Category name',
+    field: 'category'
+  },
+  {
+    header: 'Description',
+    field: 'description'
+  },
+  {
+    header: 'Slug',
+    field: 'slug'
+  },
+  {
+    header: 'Count',
+    field: 'count'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+export const categoriesModelData = [
+  {
+    category: "Electric cars",
+    description: "ev vehicles",
+    slug: "Electric cars",
+    count: 3,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    category: "Electric cars",
+    description: "ev vehicles",
+    slug: "Electric cars",
+    count: 3,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    category: "Electric cars",
+    description: "ev vehicles",
+    slug: "Electric cars",
+    count: 3,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    category: "Electric cars",
+    description: "ev vehicles",
+    slug: "Electric cars",
+    count: 3,
+    action: ['edit', 'hide', 'delete']
+  },
+  {
+    category: "Electric cars",
+    description: "ev vehicles",
+    slug: "Electric cars",
+    count: 3,
+    action: ['edit', 'hide', 'delete']
+  },
   
  
   

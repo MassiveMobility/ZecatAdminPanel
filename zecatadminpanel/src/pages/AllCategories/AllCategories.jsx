@@ -1,20 +1,27 @@
-import { Box, Button, MenuItem, Select, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import CustomTab from '../../components/CustomTabs/CustomTab'
-import SearchInput from '../../components/Inputs/SearchInput'
-import Sorting from '../TwoWheelerPage/Sorting'
-import CustomTable from '../../components/CustomTable/CustomTable'
-import { addVehicleModeltabItems, allBrands, postModelTable, postsModelData, vehicleModelData, vehicleModelTable } from '../../constants/mapItems'
 import { useNavigate } from 'react-router-dom'
+import SearchInput from '../../components/Inputs/SearchInput'
+import CustomTable from '../../components/CustomTable/CustomTable'
+import { categoriesModelData, categoriesModelTable } from '../../constants/mapItems'
+import AddCategory from '../../components/DialogBox/AddCategory'
 
-const AllPosts = () => {
-    const postsTabs = addVehicleModeltabItems.filter((item) => item.label !== 'Scheduled')
+const AllCategories = () => {
     // const [selectBrand, setSelectBrand] = useState("");
+    const [openAddCategory, setOpenAddCategory] = useState(false);
     const navigate = useNavigate()
   
     // const handleSelectBrand = (e) => {
     //   setSelectBrand(e.target.value);
     // };
+
+    const handleOpenAddCategory = () => {
+        setOpenAddCategory(true);
+    }
+
+    const handleCloseAddCategory = () => {
+        setOpenAddCategory(false);
+    }
   
   
     const handleAddModel= () => {
@@ -27,7 +34,7 @@ const AllPosts = () => {
       fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
       fontFamily={"mySecondFont"}
     >
-     All posts
+    Manage categories
     </Typography>
     <Box
       sx={{
@@ -39,9 +46,8 @@ const AllPosts = () => {
         overflow: "auto",
       }}
     >
-      <CustomTab item={postsTabs} />
       <Box
-        mt={"24px"}
+        mt={"12px"}
         display={"flex"}
         alignItems={"center"}
         gap={"12px"}
@@ -115,7 +121,7 @@ const AllPosts = () => {
               fontFamily: "mySecondFont",
               color: "#2079FF",
             }}
-            onClick={handleAddModel}
+            onClick={handleOpenAddCategory}
           >
             <span
               class="material-symbols-outlined"
@@ -123,7 +129,7 @@ const AllPosts = () => {
             >
               add
             </span>
-            ADD NEW POST
+            ADD NEW
           </Button>
         </Box>
       </Box>
@@ -140,12 +146,14 @@ const AllPosts = () => {
         >
           Showing 1-10 of 80 vehicle models
         </Typography>
-        <CustomTable headRow={postModelTable} rowData={postsModelData} />
+        <CustomTable headRow={categoriesModelTable} rowData={categoriesModelData} />
       </Box>
     
     </Box>
+
+    <AddCategory open={openAddCategory}  onClose={handleCloseAddCategory}/>
   </Box>
   )
 }
 
-export default AllPosts
+export default AllCategories

@@ -51,15 +51,15 @@ const dashboardOptions = [
       },
       {
         title:  "Videos",
-        path: "/videos"
+        path: "/all_videos"
       },
       {
         title: "Manage categories",
-        path: "/posts_categories"
+        path: "/all_categories"
       },
       {
         title: "Manage tags",
-        path: "/posts_tags"
+        path: "/all_tags"
       },
     ]
   },

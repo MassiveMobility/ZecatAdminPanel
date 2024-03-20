@@ -12,6 +12,8 @@ import AddTwoWheeler from "../pages/TwoWheelerPage/AddTwoWheeler";
 import AddVariant from "../pages/AddVariant/AddVariant";
 import AddBrand from "../pages/AddBrand/AddBrand";
 import AllPosts from "../pages/AllPosts/AllPosts";
+import AllVideos from "../pages/AllVideos/AllVideos";
+import AllCategories from "../pages/AllCategories/AllCategories";
 
 export const allRoutes = [
   {
@@ -69,6 +71,14 @@ export const allRoutes = [
   {
     path: "/all_posts",
     element: <AllPosts />,
+  },
+  {
+    path: "/all_videos",
+    element: <AllVideos />,
+  },
+  {
+    path: "/all_categories",
+    element: <AllCategories />,
   },
   {
     path: "*",
