@@ -59,7 +59,7 @@ const dashboardOptions = [
       },
       {
         title: "Manage tags",
-        path: "/all_tags"
+        path: "/manage_tags"
       },
     ]
   },
@@ -71,30 +71,30 @@ const dashboardOptions = [
     childs: [
       {
         title: "User list",
-        path: "/all_user_list"
+        path: "/all_users"
       },
       {
         title: "Manage Reviews",
-        path: "/user_reviews"
+        path: "/all_reviews"
       },
     ]
   },
   {
     name: "Enquiries",
     icon: "contact_support",
-    path: "/enquiry",
+    path: "/all_enquiries",
     children: false,
   },
   {
     name: "Loan applications",
     icon: "request_page",
-    path: "/loan_application",
+    path: "/all_loans",
     children: false,
   },
   {
     name: "Lease applications",
     icon: "contract",
-    path: "/lease_application",
+    path: "/all_leases",
     children: false,
   },
 ];

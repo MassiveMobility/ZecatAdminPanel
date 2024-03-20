@@ -5,6 +5,36 @@ export const addVehicleModeltabItems = [
   { label: "Trash" },
  
 ];
+export const enquiryTabItems = [
+  { label: "Product enquiries" },
+  { label: "General enquiries" },
+  { label: "Trash" },
+ 
+];
+
+export const enquiryOptions = [
+  {
+    label:"UNSEEN"
+  },
+  {
+    label:"OPEN"
+  },
+  {
+    label:"RESOLVED"
+  },
+]
+
+export const loanTabItems = [
+  { label: "Loan applications" },
+  { label: "Trash" },
+];
+export const leaseTabItems = [
+  { label: "Lease applications" },
+  { label: "Trash" },
+];
+
+
+
 
 export const allBrands = [
   {label: 'Tata'},
@@ -120,7 +150,7 @@ export const vehicleModelData = [
     id: '1212',
     brand: "Tata",
     variants: ["Sedan","SUV"],
-    status: "live",
+    status:"live",
     action: ['edit', 'hide', 'delete']
   },
   {
@@ -179,38 +209,7 @@ export const vehicleModelData = [
     status: "live",
     action: ['edit', 'hide', 'delete']
   },
-  {
-    model: 'Creta',
-    id: '13232',
-    brand: "Hyundai",
-    variants: ["Xl","Mega"],
-    status: "live",
-    action: ['edit', 'hide', 'delete']
-  },
-  {
-    model: 'Swift',
-    id: '15562',
-    brand: "Maruti Suzuki",
-    variants: ["Dezire","Life"],
-    status: "live",
-    action: ['edit', 'hide', 'delete']
-  },
-  {
-    model: 'XUV700',
-    id: '1212',
-    brand: "Mahindra",
-    variants: ["CR7","Goat"],
-    status: "live",
-    action: ['edit', 'hide', 'delete']
-  },
-  {
-    model: 'Punch',
-    id: '1212',
-    brand: "Tata",
-    variants: ["Sedan","SUV"],
-    status: "live",
-    action: ['edit', 'hide', 'delete']
-  },
+
   
 ]
 
@@ -550,4 +549,424 @@ export const categoriesModelData = [
   
  
   
+]
+
+export const  tagsModelTable = [
+  {
+    header: 'Tag name',
+    field: 'tag'
+  },
+  {
+    header: 'Count',
+    field: 'count'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+
+export const tagsModelData = [
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  {
+    tag: "Electric cars",
+    count: 3,
+    action: ['edit', 'delete']
+  },
+  
+ 
+  
+]
+
+export const  userModelTable = [
+  {
+    header: 'User',
+    field: 'name'
+  },
+  {
+    header: 'Phone',
+    field: 'phone_number'
+  },
+  {
+    header: 'Email',
+    field: 'email'
+  },
+  {
+    header: 'User ID',
+    field: '_id'
+  },
+  {
+    header: 'Registered date',
+    field: 'created_at'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+
+export const userModelData = [
+  {
+    name: "John Doe",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 32,
+    action: ['delete']
+  },
+  {
+    name: "Rohan kumar",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+  {
+    name: "Abhishek nayal",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+  {
+    name: "Ankit dalal",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+  {
+    name: "Prabhat kumar shukla",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+  {
+    name: "Hritik raj",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+  {
+    name: "Sahil gour",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+  {
+    name: "Siddharth mishra",
+    phone_number:"9123456789",
+    email: "john.doe@gmail.com" ,
+    _id: "001",
+    created_at: 21,
+    action: ['delete']
+  },
+
+  
+ 
+  
+]
+
+export const  reviewsModelTable = [
+  {
+    header: 'Product',
+    field: 'product'
+  },
+  {
+    header: 'User ID',
+    field: '_id'
+  },
+  {
+    header: 'Review',
+    field: 'review'
+  },
+  {
+    header: 'Date',
+    field: 'created_at'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+
+export const reviewsModelData = [
+  {
+    product: "Ather 450X",
+    review: "Lorem ipsum dolor sit amet consectetur. Feugiat velit id ",
+    _id: "001",
+    created_at: 32,
+    action: ['view', 'delete']
+  },
+  {
+    product: "Ather 450X",
+    review: "Lorem ipsum dolor sit amet consectetur. Feugiat velit id ",
+    _id: "001",
+    created_at: 32,
+    action: ['view', 'delete']
+  },
+  {
+    product: "Ather 450X",
+    review: "Lorem ipsum dolor sit amet consectetur. Feugiat velit id ",
+    _id: "001",
+    created_at: 32,
+    action: ['view', 'delete']
+  },
+  {
+    product: "Ather 450X",
+    review: "Lorem ipsum dolor sit amet consectetur. Feugiat velit id ",
+    _id: "001",
+    created_at: 32,
+    action: ['view', 'delete']
+  },
+  {
+    product: "Ather 450X",
+    review: "Lorem ipsum dolor sit amet consectetur. Feugiat velit id ",
+    _id: "001",
+    created_at: 32,
+    action: ['view', 'delete']
+  },
+]
+
+export const  enquiryModelTable = [
+  {
+    header: 'Enquiry ID',
+    field: '_id'
+  },
+  {
+    header: 'User',
+    field: 'name'
+  },
+  {
+    header: 'Phone',
+    field: 'phone_number'
+  },
+  {
+    header: 'Date',
+    field: 'created_at'
+  },
+  {
+    header: 'Enquiry status',
+    field: 'status'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+export const enquiryModelData = [
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "open",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "unseen",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "unseen",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "open",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "resolved",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "open",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "resolved",
+    action:['view', 'delete']
+  },
+]
+
+export const  loanModelTable = [
+  {
+    header: 'Application ID',
+    field: '_id'
+  },
+  {
+    header: 'User',
+    field: 'name'
+  },
+  {
+    header: 'Phone',
+    field: 'phone_number'
+  },
+  {
+    header: 'Date',
+    field: 'created_at'
+  },
+  {
+    header: 'Status',
+    field: 'status'
+  },
+  {
+    header: 'Action',
+    field: 'action'
+  },
+]
+
+export const loanModelData = [
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "open",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "unseen",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "unseen",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "open",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "resolved",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "open",
+    action:['view', 'delete']
+  },
+  {
+    _id: "1",
+    name:"John Doe",
+    phone_number: "9354645233",
+    created_at: 31,
+    status: "resolved",
+    action:['view', 'delete']
+  },
 ]

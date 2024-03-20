@@ -14,6 +14,9 @@ import AddBrand from "../pages/AddBrand/AddBrand";
 import AllPosts from "../pages/AllPosts/AllPosts";
 import AllVideos from "../pages/AllVideos/AllVideos";
 import AllCategories from "../pages/AllCategories/AllCategories";
+import AddTags from "../pages/AddTags/AddTags";
+import AllUsers from "../pages/AllUsers/AllUsers";
+import AllReviews from "../pages/AllReviews/AllReviews";
 
 export const allRoutes = [
   {
@@ -53,15 +56,15 @@ export const allRoutes = [
     element: <UserListPage />,
   },
   {
-    path: "/enquiry",
+    path: "/all_enquiries",
     element: <EnquiryPage />,
   },
   {
-    path: "/loan_application",
+    path: "/all_loans",
     element: <LoanApplicationPage />,
   },
   {
-    path: "/lease_application",
+    path: "/all_leases",
     element: <LeaseApplicationPage />,
   },
   {
@@ -80,6 +83,19 @@ export const allRoutes = [
     path: "/all_categories",
     element: <AllCategories />,
   },
+  {
+    path: "/manage_tags",
+    element: <AddTags />,
+  },
+  {
+    path: "/all_users",
+    element: <AllUsers />,
+  },
+  {
+    path: "/all_reviews",
+    element: <AllReviews />,
+  },
+  
   {
     path: "*",
     element: "not found",
