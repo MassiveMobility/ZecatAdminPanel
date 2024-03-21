@@ -17,6 +17,8 @@ import AllCategories from "../pages/AllCategories/AllCategories";
 import AddTags from "../pages/AddTags/AddTags";
 import AllUsers from "../pages/AllUsers/AllUsers";
 import AllReviews from "../pages/AllReviews/AllReviews";
+import AddVideos from "../pages/AllVideos/AddVideos";
+import AddPost from "../pages/AllPosts/AddPost";
 
 export const allRoutes = [
   {
@@ -76,8 +78,16 @@ export const allRoutes = [
     element: <AllPosts />,
   },
   {
+    path: "/all_posts/:id",
+    element: <AddPost />,
+  },
+  {
     path: "/all_videos",
     element: <AllVideos />,
+  },
+  {
+    path: "/all_videos/:id",
+    element: <AddVideos />,
   },
   {
     path: "/all_categories",
@@ -95,7 +105,7 @@ export const allRoutes = [
     path: "/all_reviews",
     element: <AllReviews />,
   },
-  
+
   {
     path: "*",
     element: "not found",

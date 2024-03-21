@@ -1,71 +1,76 @@
-import { Box, Button, Typography } from '@mui/material'
-import React from 'react'
-import CustomTab from '../../components/CustomTabs/CustomTab'
-import SearchInput from '../../components/Inputs/SearchInput'
-import CustomTable from '../../components/CustomTable/CustomTable'
-import { useNavigate } from 'react-router-dom'
-import { addVehicleModeltabItems, videoModelData, videoModelTable } from '../../constants/mapItems'
+import { Box, Button, Typography } from "@mui/material";
+import React from "react";
+import CustomTab from "../../components/CustomTabs/CustomTab";
+import SearchInput from "../../components/Inputs/SearchInput";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import { useNavigate } from "react-router-dom";
+import {
+  addVehicleModeltabItems,
+  videoModelData,
+  videoModelTable,
+} from "../../constants/mapItems";
 
 const AllVideos = () => {
-    const postsTabs = addVehicleModeltabItems.filter((item) => item.label !== 'Scheduled')
-    // const [selectBrand, setSelectBrand] = useState("");
-    const navigate = useNavigate()
-  
-    // const handleSelectBrand = (e) => {
-    //   setSelectBrand(e.target.value);
-    // };
-  
-  
-    const handleAddModel= () => {
-      navigate(`add_post`)
-    }
+  const postsTabs = addVehicleModeltabItems.filter(
+    (item) => item.label !== "Scheduled"
+  );
+  // const [selectBrand, setSelectBrand] = useState("");
+  const navigate = useNavigate();
+
+  // const handleSelectBrand = (e) => {
+  //   setSelectBrand(e.target.value);
+  // };
+
+  const handleAddModel = () => {
+    navigate(`add_videos`);
+  };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-    <Typography
-      color={"#1b1b1b"}
-      fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
-      fontFamily={"mySecondFont"}
-    >
-     Videos
-    </Typography>
-    <Box
-      sx={{
-        padding: { md: "24px", xs: "16px" },
-        background: "#fff",
-        borderRadius: "12px",
-        width: "100%",
-        marginTop: "16px",
-        overflow: "auto",
-      }}
-    >
-      <CustomTab item={postsTabs} />
-      <Box
-        mt={"24px"}
-        display={"flex"}
-        alignItems={"center"}
-        gap={"12px"}
-        justifyContent={"space-between"}
-        flexWrap={"wrap"}
+      <Typography
+        color={"#1b1b1b"}
+        fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
+        fontFamily={"mySecondFont"}
       >
+        Videos
+      </Typography>
+      <Box
+        sx={{
+          padding: { md: "24px", xs: "16px" },
+          background: "#fff",
+          borderRadius: "12px",
+          width: "100%",
+          marginTop: "16px",
+          overflow: "auto",
+        }}
+      >
+        <CustomTab item={postsTabs} />
         <Box
+          mt={"24px"}
           display={"flex"}
           alignItems={"center"}
           gap={"12px"}
+          justifyContent={"space-between"}
           flexWrap={"wrap"}
-          width={{ xs: "100%", md: "unset" }}
         >
-          {/*---------------------------------------- SEARCH INPUT--------------------------------------------- */}
-          <Box width={{ xs: "100%", md: "400px" }}>
-            <SearchInput />
-          </Box>
-          {/*---------------------------------------- SORTING --------------------------------------------- */}
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            gap={"12px"}
+            flexWrap={"wrap"}
+            width={{ xs: "100%", md: "unset" }}
+          >
+            {/*---------------------------------------- SEARCH INPUT--------------------------------------------- */}
+            <Box width={{ xs: "100%", md: "400px" }}>
+              <SearchInput />
+            </Box>
+            {/*---------------------------------------- SORTING --------------------------------------------- */}
 
-          {/* <Box>
+            {/* <Box>
             <Sorting />
           </Box> */}
 
-          {/*---------------------------------------- SELECT ALL BRANDS--------------------------------------------- */}
-          {/* <Box width={{ xs: "100%", md: "240px" }}>
+            {/*---------------------------------------- SELECT ALL BRANDS--------------------------------------------- */}
+            {/* <Box width={{ xs: "100%", md: "240px" }}>
             <Select
               value={selectBrand}
               onChange={handleSelectBrand}
@@ -102,49 +107,48 @@ const AllVideos = () => {
               ))}
             </Select>
           </Box> */}
-        </Box>
-        {/*---------------------------------------- ADD NEW BUTTON--------------------------------------------- */}
+          </Box>
+          {/*---------------------------------------- ADD NEW BUTTON--------------------------------------------- */}
 
-        <Box>
-          <Button
-            sx={{
-              padding: "8px 16px",
-              border: "1px solid #2079FF",
-              borderRadius: "8px",
-              fontFamily: "mySecondFont",
-              color: "#2079FF",
-            }}
-            onClick={handleAddModel}
-          >
-            <span
-              class="material-symbols-outlined"
-              style={{ marginRight: "8px" }}
+          <Box>
+            <Button
+              sx={{
+                padding: "8px 16px",
+                border: "1px solid #2079FF",
+                borderRadius: "8px",
+                fontFamily: "mySecondFont",
+                color: "#2079FF",
+              }}
+              onClick={handleAddModel}
             >
-              add
-            </span>
-            ADD NEW VIDEO
-          </Button>
+              <span
+                class="material-symbols-outlined"
+                style={{ marginRight: "8px" }}
+              >
+                add
+              </span>
+              ADD NEW VIDEO
+            </Button>
+          </Box>
+        </Box>
+
+        {/*---------------------------------------- TABLE --------------------------------------------- */}
+        <Box>
+          <Typography
+            mt={"12px"}
+            mb={"8px !important"}
+            color={"#2f2f2f"}
+            fontSize={"14px"}
+            fontFamily={"myFourthFont"}
+            textAlign={"left"}
+          >
+            Showing 1-10 of 80 vehicle models
+          </Typography>
+          <CustomTable headRow={videoModelTable} rowData={videoModelData} />
         </Box>
       </Box>
-
-      {/*---------------------------------------- TABLE --------------------------------------------- */}
-      <Box>
-        <Typography
-          mt={"12px"}
-          mb={"8px !important"}
-          color={"#2f2f2f"}
-          fontSize={"14px"}
-          fontFamily={"myFourthFont"}
-          textAlign={"left"}
-        >
-          Showing 1-10 of 80 vehicle models
-        </Typography>
-        <CustomTable headRow={videoModelTable} rowData={videoModelData} />
-      </Box>
-    
     </Box>
-  </Box>
-  )
-}
+  );
+};
 
-export default AllVideos
+export default AllVideos;
