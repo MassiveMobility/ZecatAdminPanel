@@ -1,6 +1,11 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { enquiryModelData, enquiryModelTable, enquiryOptions, enquiryTabItems} from "../../constants/mapItems";
+import {
+  enquiryModelData,
+  enquiryModelTable,
+  enquiryOptions,
+  enquiryTabItems,
+} from "../../constants/mapItems";
 import SearchInput from "../../components/Inputs/SearchInput";
 import { useNavigate } from "react-router-dom";
 import Sorting from "../TwoWheelerPage/Sorting";
@@ -9,17 +14,12 @@ import CustomTab from "../../components/CustomTabs/CustomTab";
 
 const EnquiryPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
 
-
- 
-
- 
-  
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -120,7 +120,6 @@ const EnquiryPage = () => {
           </Typography>
           <CustomTable headRow={enquiryModelTable} rowData={enquiryModelData} />
         </Box>
-      
       </Box>
     </Box>
   );

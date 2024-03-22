@@ -13,6 +13,7 @@ import {
   tableCellClasses,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -49,6 +50,11 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
 
   const handleChangePagination = (e, page) => {
     setCurrentPage(page);
+  };
+
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("enquiry_details");
   };
 
   useEffect(() => {
@@ -111,6 +117,7 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
                                 sx={{
                                   cursor: "pointer",
                                 }}
+                                onClick={handleNavigate}
                               >
                                 <Typography fontSize={"14px"} color={"#2079FF"}>
                                   View
