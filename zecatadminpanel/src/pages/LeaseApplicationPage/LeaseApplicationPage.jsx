@@ -14,11 +14,6 @@ const LeaseApplicationPage = () => {
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
-
-
- 
-
- 
   
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>

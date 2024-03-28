@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 
-const VideoCategories = () => {
+const VideoCategories = ({mt=false}) => {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const categoriesData = [
     {
@@ -37,7 +37,7 @@ const VideoCategories = () => {
         flexDirection: "column",
         gap: "16px",
         width: "100%",
-        marginTop: "24px",
+        marginTop: mt ? " " : "24px",
       }}
     >
       <Typography

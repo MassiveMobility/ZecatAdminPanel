@@ -17,10 +17,13 @@ import SearchInput from "../../components/Inputs/SearchInput";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import Sorting from "./Sorting";
 import {useNavigate} from "react-router-dom"
+import { fetchProducts } from "../../redux/actions/getAllProducts";
+import {useDispatch} from "react-redux"
 
 const TwoWheelerPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
@@ -31,6 +34,9 @@ const TwoWheelerPage = () => {
     navigate(`add_model`)
   }
 
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
  
   
   return (

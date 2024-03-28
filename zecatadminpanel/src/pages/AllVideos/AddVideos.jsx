@@ -30,7 +30,7 @@ const AddVideos = () => {
               }}
             >
               <ThumbnailImg />
-              <VideoCategories />
+              <VideoCategories mt={true}/>
             </Box>
           </Box>
         </Grid>
