@@ -44,7 +44,6 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
     }
   }, [overviewImage]);
 
-
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>
       <Typography
@@ -151,13 +150,30 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
               files={files}
               setFiles={setFiles}
             />
-           
           </Grid>
           {standOutFeatures && (
             <Grid item md={8}>
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "8px" }}
               >
+                <Box>
+                  {standOutFeatures ? (
+                    <input
+                      style={{
+                        width: "100%",
+                        padding: "12px 16px",
+                        borderRadius: "8px",
+                        border: "1px solid rgba(47, 47, 47, 0.25)",
+                        outline: "none",
+                        height: "64px",
+                      }}
+                      placeholder="Enter Input here"
+                      type="text"
+                    />
+                  ) : (
+                    ""
+                  )}
+                </Box>
                 <Box>
                   <textarea
                     value={features}

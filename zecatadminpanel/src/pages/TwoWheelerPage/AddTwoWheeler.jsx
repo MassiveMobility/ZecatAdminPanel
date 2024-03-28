@@ -37,7 +37,7 @@ const AddTwoWheeler = () => {
 
         <Grid item md={3}>
           <PublishCard />
-          <ScheduleCard />
+          {/* <ScheduleCard /> */}
           <TagsCard />
           <DeleteModalCard />
         </Grid>

@@ -21,7 +21,14 @@ const AddVideos = () => {
         <Grid item md={9}>
           <Box display={"flex"} flexDirection={"column"} gap={"24px"}>
             <NewVideo />
-            <Box sx={{ display: "flex", gap: "24px", textWrap: "wrap" }}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "24px",
+                textWrap: "wrap",
+                flexDirection: { md: "row", xs: "column" },
+              }}
+            >
               <ThumbnailImg />
               <VideoCategories />
             </Box>

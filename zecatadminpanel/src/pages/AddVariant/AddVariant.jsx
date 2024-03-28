@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import VariantNamePriceCard from "../../components/VariantsComponent/VariantNamePriceCard";
 import VariantSpecFeature from "../../components/VariantsComponent/VariantSpecFeature";
 import VariantColor from "../../components/VariantsComponent/VariantColor";
@@ -31,6 +31,26 @@ const AddVariant = () => {
           <TagsCard variantTags={true} />
         </Grid>
       </Grid>
+      <Box
+        sx={{ marginTop: "24px", display: "flex", justifyContent: "flex-end" }}
+      >
+        <Button
+          sx={{
+            background: "#2079FF",
+            borderRadius: "8px",
+            padding: "12px 24px",
+            color: "#fff",
+            maxWidth: "275px",
+            width: "100%",
+            fontFamily: "mySecondFont",
+            ":hover": {
+              background: "#2079FF",
+            },
+          }}
+        >
+          ADD VARIANT
+        </Button>
+      </Box>
     </Box>
   );
 };
