@@ -1,20 +1,27 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomTab from "../../components/CustomTabs/CustomTab";
 import { enquiryOptions, leaseTabItems, loanModelData, loanModelTable } from "../../constants/mapItems";
 import SearchInput from "../../components/Inputs/SearchInput";
 import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchApplications } from "../../redux/actions/getAllApplicationsSlice";
 
 const LeaseApplicationPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate()
 
+  const dispatch = useDispatch()
+
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
-  
+
+  useEffect(() => {
+    dispatch(fetchApplications())
+  }, [])
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -22,7 +29,7 @@ const LeaseApplicationPage = () => {
         fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
         fontFamily={"mySecondFont"}
       >
-        Enquiries
+        LEASE APPLICATIONS
       </Typography>
       <Box
         sx={{

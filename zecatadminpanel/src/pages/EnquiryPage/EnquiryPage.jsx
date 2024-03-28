@@ -1,5 +1,5 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   enquiryModelData,
   enquiryModelTable,
@@ -11,14 +11,21 @@ import { useNavigate } from "react-router-dom";
 import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import CustomTab from "../../components/CustomTabs/CustomTab";
+import { useDispatch } from "react-redux";
+import { fetchEnquiries } from "../../redux/actions/getAllEnquiriesSlice";
 
 const EnquiryPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch(fetchEnquiries())
+  }, [])
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>

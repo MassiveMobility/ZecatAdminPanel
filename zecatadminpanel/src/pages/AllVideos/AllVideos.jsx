@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomTab from "../../components/CustomTabs/CustomTab";
 import SearchInput from "../../components/Inputs/SearchInput";
 import CustomTable from "../../components/CustomTable/CustomTable";
@@ -9,6 +9,8 @@ import {
   videoModelData,
   videoModelTable,
 } from "../../constants/mapItems";
+import { fetchVideos } from "../../redux/actions/getAllVideosSlice";
+import { useDispatch } from "react-redux";
 
 const AllVideos = () => {
   const postsTabs = addVehicleModeltabItems.filter(
@@ -16,6 +18,7 @@ const AllVideos = () => {
   );
   // const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   // const handleSelectBrand = (e) => {
   //   setSelectBrand(e.target.value);
@@ -24,6 +27,10 @@ const AllVideos = () => {
   const handleAddModel = () => {
     navigate(`add_videos`);
   };
+
+  useEffect(() => {
+    dispatch(fetchVideos())
+  }, [])
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography

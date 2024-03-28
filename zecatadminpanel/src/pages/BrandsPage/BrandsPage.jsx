@@ -1,14 +1,17 @@
 import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchInput from "../../components/Inputs/SearchInput";
 import Sorting from "../TwoWheelerPage/Sorting";
 import { allBrands, brandModelData, brandModelTable, vehicleModelData } from "../../constants/mapItems";
 import CustomTable from "../../components/CustomTable/CustomTable";
+import { useDispatch } from "react-redux";
+import { fetchBrands } from "../../redux/actions/getAllBrandsSlice";
 
 const BrandsPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
@@ -18,6 +21,10 @@ const BrandsPage = () => {
   const handleAddBrand= () => {
     navigate(`add_brand`)
   }
+
+  useEffect(() => {
+    dispatch(fetchBrands())
+  }, [])
   return  <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
   <Typography
     color={"#1b1b1b"}

@@ -1,21 +1,26 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomTab from "../../components/CustomTabs/CustomTab";
 import SearchInput from "../../components/Inputs/SearchInput";
 import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { enquiryOptions, loanModelData, loanModelTable, loanTabItems } from "../../constants/mapItems";
+import { useDispatch } from "react-redux";
+import { fetchApplications } from "../../redux/actions/getAllApplicationsSlice";
 
 const LoanApplicationPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
 
-
+  useEffect(() => {
+    dispatch(fetchApplications())
+  }, [])
  
 
  
@@ -27,7 +32,7 @@ const LoanApplicationPage = () => {
         fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
         fontFamily={"mySecondFont"}
       >
-        Enquiries
+       LOAN APPLICATIONS
       </Typography>
       <Box
         sx={{

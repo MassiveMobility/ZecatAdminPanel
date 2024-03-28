@@ -1,13 +1,20 @@
 import { Box, Button, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import SearchInput from '../../components/Inputs/SearchInput'
 import Sorting from '../TwoWheelerPage/Sorting'
 import CustomTable from '../../components/CustomTable/CustomTable'
 import { reviewsModelData, reviewsModelTable } from '../../constants/mapItems'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { fetchReviews } from '../../redux/actions/getAllReviewsSlice'
 
 const AllReviews = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch(fetchReviews())
+    }, [])
   
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
