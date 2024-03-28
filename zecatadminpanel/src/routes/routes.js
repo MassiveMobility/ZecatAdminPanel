@@ -20,7 +20,6 @@ import AllReviews from "../pages/AllReviews/AllReviews";
 import AddVideos from "../pages/AllVideos/AddVideos";
 import AddPost from "../pages/AllPosts/AddPost";
 import EnquiryDetail from "../pages/EnquiryPage/EnquiryDetail";
-
 export const allRoutes = [
   {
     path: "/",

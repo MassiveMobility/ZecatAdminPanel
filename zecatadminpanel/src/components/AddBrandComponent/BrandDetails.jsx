@@ -4,8 +4,23 @@ import React, { useState } from "react";
 const BrandDetails = () => {
   const [age, setAge] = useState("");
 
+  const [brandDetails, setBrandDetails] = useState({
+    name: "",
+    category: "",
+    established_year: "",
+    description: "",
+  });
+
   const handleChange = (event) => {
     setAge(event.target.value);
+  };
+
+  const handleInputChange = (event, fieldName) => {
+    const { value } = event.target;
+    setBrandDetails({
+      ...brandDetails,
+      [fieldName]: value,
+    });
   };
   return (
     <Box

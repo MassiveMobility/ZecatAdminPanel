@@ -9,7 +9,7 @@ const KeySpecs = () => {
     battery_capacity: "",
     top_speed: "",
     charging_time_ac: "",
-    fast_charging: "",
+    fast_charging: false,
     airbags_count: "",
   });
 
@@ -25,9 +25,11 @@ const KeySpecs = () => {
     const { value } = event.target;
     setFormData({
       ...formData,
-      fast_charging: value,
+      fast_charging: value === "true",
     });
   };
+
+  console.log(formData);
 
   return (
     <>
@@ -111,7 +113,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.max_power}
               onChange={(e) => handleInputChange(e, "max_power")}
             />
           </Box>
@@ -145,7 +147,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.max_torque}
               onChange={(e) => handleInputChange(e, "max_torque")}
             />
           </Box>
@@ -179,7 +181,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.airbags_count}
               onChange={(e) => handleInputChange(e, "airbags_count")}
             />
           </Box>
@@ -213,7 +215,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.battery_capacity}
               onChange={(e) => handleInputChange(e, "battery_capacity")}
             />
           </Box>
@@ -247,7 +249,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.range}
               onChange={(e) => handleInputChange(e, "range")}
             />
           </Box>
@@ -281,7 +283,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.top_speed}
               onChange={(e) => handleInputChange(e, "top_speed")}
             />
           </Box>
@@ -315,7 +317,7 @@ const KeySpecs = () => {
               }}
               placeholder="Enter Input here"
               type="text"
-              value={formData.input1}
+              value={formData.charging_time_ac}
               onChange={(e) => handleInputChange(e, "charging_time_ac")}
             />
           </Box>
@@ -354,8 +356,8 @@ const KeySpecs = () => {
                 style={{ width: "20px" }}
                 type="radio"
                 name="fast_charging"
-                value="Yes"
-                checked={formData.fast_charging === "Yes"}
+                value={true}
+                checked={formData.fast_charging === true}
                 onChange={handleRadioChange}
               />
               Yes
@@ -376,8 +378,8 @@ const KeySpecs = () => {
                 style={{ width: "20px" }}
                 type="radio"
                 name="fast_charging"
-                value="No"
-                checked={formData.fast_charging === "No"}
+                value={false}
+                checked={formData.fast_charging === false}
                 onChange={handleRadioChange}
               />
               No

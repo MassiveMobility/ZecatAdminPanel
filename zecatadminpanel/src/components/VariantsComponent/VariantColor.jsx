@@ -45,7 +45,6 @@ const VariantColor = () => {
     }
     setColorName(colorName);
     setColorCode(colorCode);
-   
   };
 
   useEffect(() => {
@@ -55,14 +54,13 @@ const VariantColor = () => {
         color_name: colorName,
         color_code: colorCode,
       };
-      setAllImages((prevImages) =>  [...prevImages, obj]);
+      setAllImages((prevImages) => [...prevImages, obj]);
       setOverviewImage("");
       setColorName("");
       setColorCode("");
       setAddData(false);
     }
   }, [overviewImage]);
-
 
   return (
     <Box
@@ -206,7 +204,6 @@ const VariantColor = () => {
                     files={files}
                     setFiles={setFiles}
                   />
-                
                 </Grid>
                 <Grid item md={8}>
                   <Box
@@ -298,7 +295,6 @@ const VariantColor = () => {
                 files={files}
                 setFiles={setFiles}
               />
-              
             </Grid>
             <Grid item md={8}>
               <Box

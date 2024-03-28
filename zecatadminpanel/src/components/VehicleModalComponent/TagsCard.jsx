@@ -1,20 +1,24 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-
-const filters = [
-  "EV Leasing",
-  "EV ",
-  "Tata EV",
-  "Ather Electric",
-  "Ola Electric",
-  "Tesla India",
-  "Auto Expo 2024",
-  "EV Review",
-];
 
 const TagsCard = ({ variantTags = false }) => {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [filters, setFilters] = useState([]);
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleAddTag = () => {
+    if (inputValue.trim() !== "") {
+      setFilters([...filters, inputValue.trim()]);
+      setInputValue("");
+    }
+  };
+  console.log(inputValue);
+  console.log(filters);
+
   const handleSelectTags = (tag) => {
     if (selectedTags.includes(tag)) {
       const tags = selectedTags.filter((tg) => tg !== tag);
@@ -23,6 +27,12 @@ const TagsCard = ({ variantTags = false }) => {
     }
     setSelectedTags([...selectedTags, tag]);
   };
+
+  const handleDeleteTag = (tag) => {
+    setFilters(filters.filter((item) => item !== tag));
+    setSelectedTags(selectedTags.filter((item) => item !== tag));
+  };
+
   return (
     <Box
       sx={{
@@ -56,6 +66,8 @@ const TagsCard = ({ variantTags = false }) => {
               }}
               type="text"
               placeholder="Enter the model name here"
+              value={inputValue}
+              onChange={handleInputChange}
             />
             <Button
               sx={{
@@ -63,6 +75,7 @@ const TagsCard = ({ variantTags = false }) => {
                 borderRadius: "8px",
                 fontFamily: "mySecondFont",
               }}
+              onClick={handleAddTag}
             >
               ADD
             </Button>
@@ -101,6 +114,10 @@ const TagsCard = ({ variantTags = false }) => {
                   <span
                     style={{ fontWeight: "300", fontSize: "20px" }}
                     className="material-symbols-outlined"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteTag(item);
+                    }}
                   >
                     cancel
                   </span>

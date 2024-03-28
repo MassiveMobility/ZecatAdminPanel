@@ -2,6 +2,22 @@ import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 const VariantNamePriceCard = () => {
+  const [priceData, setPriceData] = useState({
+    name: "",
+    price: "",
+    emi_starts_at: "",
+    insurance_price: "",
+    onroad_price: "",
+  });
+
+  const handleInputChange = (event, fieldName) => {
+    const { value } = event.target;
+    setPriceData({
+      ...priceData,
+      [fieldName]: value,
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -58,6 +74,8 @@ const VariantNamePriceCard = () => {
             }}
             type="text"
             placeholder="Enter the model name here"
+            value={priceData.name}
+            onChange={(e) => handleInputChange(e, "name")}
           />
         </Box>
         <Box
@@ -88,6 +106,8 @@ const VariantNamePriceCard = () => {
             }}
             type="text"
             placeholder="Enter the model name here"
+            value={priceData.price}
+            onChange={(e) => handleInputChange(e, "price")}
           />
         </Box>
       </Box>
@@ -128,6 +148,8 @@ const VariantNamePriceCard = () => {
             }}
             type="text"
             placeholder="Enter the model name here"
+            value={priceData.insurance_price}
+            onChange={(e) => handleInputChange(e, "insurance_price")}
           />
         </Box>
         <Box
@@ -158,6 +180,8 @@ const VariantNamePriceCard = () => {
             }}
             type="text"
             placeholder="Enter the model name here"
+            value={priceData.onroad_price}
+            onChange={(e) => handleInputChange(e, "onroad_price")}
           />
         </Box>
       </Box>
@@ -198,6 +222,8 @@ const VariantNamePriceCard = () => {
             }}
             type="text"
             placeholder="Enter the model name here"
+            value={priceData.emi_starts_at}
+            onChange={(e) => handleInputChange(e, "emi_starts_at")}
           />
         </Box>
       </Box>

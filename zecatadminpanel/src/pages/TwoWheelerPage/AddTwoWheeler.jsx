@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import BrandModalCard from "../../components/VehicleModalComponent/BrandModalCard";
 import PriceRangeCard from "../../components/VehicleModalComponent/PriceRangeCard";
@@ -32,6 +32,29 @@ const AddTwoWheeler = () => {
             <OverviewImageCard />
             {/* <KeySpecs /> */}
             <StandOutFeature />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                sx={{
+                  background: "#2079FF",
+                  borderRadius: "8px",
+                  padding: "12px 24px",
+                  color: "#fff",
+                  maxWidth: "275px",
+                  width: "100%",
+                  fontFamily: "mySecondFont",
+                  ":hover": {
+                    background: "#2079FF",
+                  },
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
           </Box>
         </Grid>
 

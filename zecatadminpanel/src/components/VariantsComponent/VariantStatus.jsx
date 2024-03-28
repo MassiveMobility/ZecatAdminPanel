@@ -1,5 +1,5 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -49,11 +49,13 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const VariantStatus = () => {
-  const [age, setAge] = React.useState("");
+  const [toggleState, setToggleState] = useState("ON");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleToggleChange = () => {
+    setToggleState(toggleState === "ON" ? "OFF" : "ON");
   };
+  console.log(toggleState);
+
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -132,6 +134,7 @@ const VariantStatus = () => {
               <AntSwitch
                 defaultChecked
                 inputProps={{ "aria-label": "ant design" }}
+                onChange={handleToggleChange}
               />
               <Typography
                 fontSize={"12px"}

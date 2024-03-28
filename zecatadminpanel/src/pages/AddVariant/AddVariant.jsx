@@ -7,6 +7,7 @@ import VariantStatus from "../../components/VariantsComponent/VariantStatus";
 import TagsCard from "../../components/VehicleModalComponent/TagsCard";
 const AddVariant = () => {
   return (
+    // variant
     <Box>
       <Typography
         textAlign={"start"}
