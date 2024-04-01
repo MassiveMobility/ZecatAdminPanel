@@ -7,11 +7,17 @@ const VariantColorImgMap = ({
   handleEditData,
   setAllImages,
   allImages,
+  setColorsAvailable
 }) => {
-  const handleDeleteImage = (img) => {
-    const updatedImgs = allImages.filter((upd) => upd.img !== img);
-    // console.log(updatedImgs);
+  const handleDeleteImage = (color) => {
+    const updatedImgs = allImages.filter((upd) => upd.color !== color);
     setAllImages(updatedImgs);
+    // updatedImgs.map((item) => {
+    //   if(item?.file){
+    //     delete item.file
+    //   }
+    // })
+    setColorsAvailable(updatedImgs)
   };
 
   return (
@@ -48,14 +54,14 @@ const VariantColorImgMap = ({
       >
         <Box
           sx={{
-            background: item.color_code,
+            background: item.color,
             width: "32px",
             height: "32px",
             borderRadius: "32px",
           }}
         ></Box>
         <Typography fontSize={"16px"} fontFamily={"mySecondFont"}>
-          {item.color_code}
+          {item.color}
         </Typography>
       </Box>
       <Box display={"flex"} width={"25%"} gap={"4px"}>
@@ -106,7 +112,7 @@ const VariantColorImgMap = ({
             border: "1px solid #D0D0D0",
             cursor: "pointer",
           }}
-          onClick={() => handleDeleteImage(item.img)}
+          onClick={() => handleDeleteImage(item.color)}
         >
           <span
             style={{ color: "#700000", fontWeight: "300" }}

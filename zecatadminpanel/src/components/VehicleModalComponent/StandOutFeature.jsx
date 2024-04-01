@@ -1,10 +1,21 @@
 import React from "react";
 import OverviewImageCard, { ImgOverViewLabel } from "./OverviewImageCard";
 
-const StandOutFeature = () => {
+const StandOutFeature = ({
+  setFeat,
+  standOutFeat,
+  allImages,
+  setAllImages,
+}) => {
   return (
     <div>
-      <OverviewImageCard standOutFeatures={true}/>
+      <OverviewImageCard
+        standOutFeatures={true}
+        standOutFeat={standOutFeat}
+        setFeat={setFeat}
+        allImages={allImages}
+        setAllImages={setAllImages}
+      />
     </div>
   );
 };

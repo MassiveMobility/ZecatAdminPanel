@@ -7,7 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import KeySpecs from "../VehicleModalComponent/KeySpecs";
 
-const VariantAccordion = () => {
+const VariantAccordion = ({setFormData, formData}) => {
   const accordionData = [
     {
       title: "Key specs",
@@ -71,7 +71,7 @@ const VariantAccordion = () => {
             </AccordionSummary>
 
             <AccordionDetails sx={{ padding: "0px" }}>
-              {item.title === "Key specs" ? <KeySpecs /> : ""}
+              {item.title === "Key specs" ? <KeySpecs setFormData={setFormData} formData={formData}/> : ""}
             </AccordionDetails>
           </Accordion>
         );

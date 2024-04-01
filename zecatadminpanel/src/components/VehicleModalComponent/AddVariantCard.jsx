@@ -1,44 +1,28 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { removeVariants } from "../../redux/actions/createProductSlice";
 
 const AddVariantCard = () => {
-  const variantData = [
-    {
-      id: "1",
-      variant: "Tiago EV XE Base",
-      feature: "19.2kWh Battery, ABS with EBD ",
-      price: "₹8.69 Lakh",
-    },
-    {
-      id: "2",
-      variant: "Tiago EV XE Base",
-      feature: "19.2kWh Battery, ABS with EBD ",
-      price: "₹8.69 Lakh",
-    },
-    {
-      id: "3",
-      variant: "Tiago EV XE Base",
-      feature: "19.2kWh Battery, ABS with EBD ",
-      price: "₹8.69 Lakh",
-    },
-  ];
-  const [visibilityStates, setVisibilityStates] = useState(
-    Array(variantData.length).fill(true)
-  );
+  const { productDetails } = useSelector((state) => state.createProduct);
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleVisibility = (index) => {
-    const newVisibilityStates = [...visibilityStates];
-    newVisibilityStates[index] = !newVisibilityStates[index];
-    setVisibilityStates(newVisibilityStates);
+    // const newVisibilityStates = [...visibilityStates];
+    // newVisibilityStates[index] = !newVisibilityStates[index];
+    // setVisibilityStates(newVisibilityStates);
   };
 
   const handleAddVariant = () => {
     navigate('add_variant')
   }
 
+  const handleRemoveVariant = (name) => {
+    dispatch(removeVariants(name))
+  }
   return (
     <Box
       sx={{
@@ -134,7 +118,7 @@ const AddVariantCard = () => {
           overflow: "auto",
         }}
       >
-        {variantData.map((item, index) => {
+        {productDetails?.variants?.map((item, index) => {
           return (
             <Box
               sx={{
@@ -145,7 +129,7 @@ const AddVariantCard = () => {
             >
               <Box sx={{ display: "flex", width: "5%" }}>
                 <Typography fontSize={"14px"} fontFamily={"mySecondFont"}>
-                  {item.id}
+                  {index + 1}
                 </Typography>
               </Box>
               <Box
@@ -160,7 +144,7 @@ const AddVariantCard = () => {
                   fontSize={"16px"}
                   fontFamily={"mySecondFont"}
                 >
-                  {item.variant}
+                  {item?.name}
                 </Typography>
                 <Typography
                   color={"#727272"}
@@ -168,7 +152,7 @@ const AddVariantCard = () => {
                   fontFamily={"myThirdFont"}
                   textAlign={"start"}
                 >
-                  {item.feature}
+                  {item?.max_torque}
                 </Typography>
               </Box>
               <Box display={"flex"} width={"25%"}>
@@ -178,7 +162,7 @@ const AddVariantCard = () => {
                   fontSize={"16px"}
                   fontFamily={"mySecondFont"}
                 >
-                  {item.price}
+                  {item?.price}
                 </Typography>
               </Box>
               <Box display={"flex"} flex={1} gap={"4px"} width={"25%"}>
@@ -230,20 +214,21 @@ const AddVariantCard = () => {
                   }}
                   onClick={() => handleVisibility(index)}
                 >
-                  {visibilityStates[index] ? (
+                  {/* {visibilityStates[index] ? (
                     <span
                       style={{ color: "#2F2F2F", fontWeight: "300" }}
                       class="material-symbols-outlined"
                     >
                       visibility
                     </span>
-                  ) : (
+                  ) : ( */}
                     <span class="material-symbols-outlined">
                       visibility_off
                     </span>
-                  )}
+                  {/* )} */}
                 </Box>
                 <Box
+                onClick={() => handleRemoveVariant(item?.name)}
                   sx={{
                     display: "flex",
                     alignItems: "center",

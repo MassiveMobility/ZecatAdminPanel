@@ -1,15 +1,8 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const BrandDetails = () => {
+const BrandDetails = ({ data, setData }) => {
   const [age, setAge] = useState("");
-
-  const [brandDetails, setBrandDetails] = useState({
-    name: "",
-    category: "",
-    established_year: "",
-    description: "",
-  });
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -17,8 +10,8 @@ const BrandDetails = () => {
 
   const handleInputChange = (event, fieldName) => {
     const { value } = event.target;
-    setBrandDetails({
-      ...brandDetails,
+    setData({
+      ...data,
       [fieldName]: value,
     });
   };
@@ -70,6 +63,8 @@ const BrandDetails = () => {
           }}
           type="text"
           placeholder="Enter the Brand name here"
+          value={data.name}
+          onChange={(e) => handleInputChange(e, "name")}
         />
       </Box>
       <Box
@@ -97,7 +92,7 @@ const BrandDetails = () => {
             Category
           </Typography>
 
-          <Select
+          {/* <Select
             fullWidth
             value={age}
             onChange={handleChange}
@@ -118,7 +113,23 @@ const BrandDetails = () => {
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+          </Select> */}
+
+          <input
+            style={{
+              height: "56px",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              border: "1px solid rgba(47, 47, 47, 0.25)",
+              outline: "none",
+              fontSize: "16px",
+              fontFamily: "myFourthFont",
+            }}
+            type="text"
+            placeholder="Enter the category here"
+            value={data.category}
+            onChange={(e) => handleInputChange(e, "category")}
+          />
         </Box>
         <Box
           sx={{
@@ -136,28 +147,21 @@ const BrandDetails = () => {
           >
             Brand established year
           </Typography>
-          <Select
-            fullWidth
-            value={age}
-            onChange={handleChange}
-            displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-            sx={{
+          <input
+            style={{
+              height: "56px",
+              padding: "12px 16px",
               borderRadius: "8px",
-              "& .MuiSelect-select": {
-                textAlign: "start",
-              },
+              border: "1px solid rgba(47, 47, 47, 0.25)",
+              outline: "none",
+              fontSize: "16px",
+              fontFamily: "myFourthFont",
             }}
-          >
-            <MenuItem value="">
-              <em style={{ fontStyle: "normal", color: "#7a7a7a" }}>
-                Select the year
-              </em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+            type="text"
+            placeholder="Enter the Brand Established Year"
+            value={data.established_year}
+            onChange={(e) => handleInputChange(e, "established_year")}
+          />
         </Box>
       </Box>
       <Box
@@ -190,6 +194,8 @@ const BrandDetails = () => {
           }}
           type="text"
           placeholder="Enter the Brand name here"
+          value={data.description}
+          onChange={(e) => handleInputChange(e, "description")}
         />
       </Box>
     </Box>

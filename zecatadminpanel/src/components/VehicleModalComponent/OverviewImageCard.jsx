@@ -4,11 +4,11 @@ import { useDropzone } from "react-dropzone";
 import ImagesMap from "./ImagesMap";
 import Dropbox from "../dropbox/Dropbox";
 
-const OverviewImageCard = ({ standOutFeatures = false }) => {
+const OverviewImageCard = ({allImages = [],setAllImages,  standOutFeatures = false, setFeat, standOutFeat }) => {
   const [overviewImage, setOverviewImage] = useState([]);
-  const [allImages, setAllImages] = useState([]);
   const [features, setFeatures] = useState("");
   const [files, setFiles] = useState([]);
+  const [featTitle, setFeatTitle] = useState('');
 
   let { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     multiple: true,
@@ -21,24 +21,55 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
         reader.readAsDataURL(file);
         reader.onload = () => {
           const imageUrl = reader.result;
-          setOverviewImage((prevImages) => [...prevImages, imageUrl]);
+          const updatedImage = {
+            img: imageUrl,
+            file: file, // Store the file content
+          };
+          // setOverviewImage((prevImages) => [...prevImages, imageUrl]);
+          setOverviewImage((prevImages) => [...prevImages, updatedImage]);
         };
       });
     }
   };
 
+ 
+
   useEffect(() => {
     if (overviewImage.length > 0) {
+
       const updatedAllImages = [];
+      const featuresArr = [];
 
       for (let i = 0; i < overviewImage.length; i++) {
-        const obj = {
-          img: overviewImage[i],
-        };
+        let obj = {}
+        if(standOutFeatures){
+           obj = {
+            img: overviewImage[i].img,
+            file: overviewImage[i].file,
+            tag: 'Standout'
+          };
+          const featObj = {
+            title: featTitle,
+            features: features,
+            image: ""
+          }
+          featuresArr.push(featObj)
+        }else{
+          obj = {
+           img: overviewImage[i].img,
+           file: overviewImage[i].file,
+           tag: 'Overview'
+         };
+        }
 
         updatedAllImages.push(obj);
       }
       setAllImages((prevImages) => [...prevImages, ...updatedAllImages]);
+      if(standOutFeatures){
+
+        setFeat((prevFeats) => [...prevFeats, ...featuresArr])
+        setFeatures('')
+      }
       setOverviewImage([]);
       setFiles([]);
     }
@@ -124,7 +155,9 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
                 id={index}
                 setAllImages={setAllImages}
                 allImages={allImages}
-                features={features}
+                features={featTitle}
+                standOutFeatures={standOutFeatures}
+                setFeat={setFeat}
               />
             );
           })}
@@ -159,6 +192,8 @@ const OverviewImageCard = ({ standOutFeatures = false }) => {
                 <Box>
                   {standOutFeatures ? (
                     <input
+                    value={featTitle}
+                    onChange={(e) => setFeatTitle(e.target.value)}
                       style={{
                         width: "100%",
                         padding: "12px 16px",

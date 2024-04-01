@@ -11,6 +11,8 @@ const COMMENT_ROUTE = BASE_URL_V1 + "comments/";
 
 export const endPoints = {
   createProduct: PRODUCT_ROUTE,
+  createBrand: BRAND_ROUTE,
+  createVideo: VIDEO_ROUTE,
   getAllProducts: PRODUCT_ROUTE + "all/",
   getAllBrands: BRAND_ROUTE,
   getAllVideos: VIDEO_ROUTE,

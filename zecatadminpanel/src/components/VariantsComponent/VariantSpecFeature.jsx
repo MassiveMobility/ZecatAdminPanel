@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import VariantAccordion from "./VariantAccordion";
 
-const VariantSpecFeature = () => {
+const VariantSpecFeature = ({setFormData, formData}) => {
   return (
     <Box
       sx={{
@@ -23,7 +23,7 @@ const VariantSpecFeature = () => {
         Specs & Features
       </Typography>
       <Box sx={{ marginTop: "16px" }}>
-        <VariantAccordion />
+        <VariantAccordion setFormData={setFormData} formData={formData}/>
       </Box>
     </Box>
   );

@@ -1,20 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const VariantNamePriceCard = () => {
-  const [priceData, setPriceData] = useState({
-    name: "",
-    price: "",
-    emi_starts_at: "",
-    insurance_price: "",
-    onroad_price: "",
-  });
+const VariantNamePriceCard = ({setPriceData, priceData}) => {
+ 
 
   const handleInputChange = (event, fieldName) => {
     const { value } = event.target;
     setPriceData({
       ...priceData,
-      [fieldName]: value,
+      [fieldName]: fieldName === 'name' ? value : Number(value),
     });
   };
 
@@ -104,8 +98,8 @@ const VariantNamePriceCard = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
-            placeholder="Enter the model name here"
+            type="number"
+            placeholder="Enter the price here"
             value={priceData.price}
             onChange={(e) => handleInputChange(e, "price")}
           />
@@ -146,8 +140,8 @@ const VariantNamePriceCard = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
-            placeholder="Enter the model name here"
+            type="number"
+            placeholder="Enter the insurance here"
             value={priceData.insurance_price}
             onChange={(e) => handleInputChange(e, "insurance_price")}
           />
@@ -178,8 +172,8 @@ const VariantNamePriceCard = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
-            placeholder="Enter the model name here"
+            type="number"
+            placeholder="Enter the on road here"
             value={priceData.onroad_price}
             onChange={(e) => handleInputChange(e, "onroad_price")}
           />
@@ -220,8 +214,8 @@ const VariantNamePriceCard = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
-            placeholder="Enter the model name here"
+            type="number"
+            placeholder="Enter the  emi here"
             value={priceData.emi_starts_at}
             onChange={(e) => handleInputChange(e, "emi_starts_at")}
           />

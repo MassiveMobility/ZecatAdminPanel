@@ -1,5 +1,5 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -48,12 +48,14 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const PublishCard = () => {
-  const [age, setAge] = React.useState("");
+const PublishCard = ({selectedStatus, setSelectedStatus, publicMode, setPublicMode}) => {
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setSelectedStatus(event.target.value);
   };
+  const handleToggleVisibility = () => {
+    setPublicMode(!publicMode)
+  }
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -76,7 +78,7 @@ const PublishCard = () => {
           </Typography>
           <Select
             fullWidth
-            value={age}
+            value={selectedStatus}
             onChange={handleChange}
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
@@ -87,14 +89,9 @@ const PublishCard = () => {
               },
             }}
           >
-            <MenuItem value="">
-              <em style={{ fontStyle: "normal", color: "#7a7a7a" }}>
-                Select the Brand
-              </em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            
+            <MenuItem value={'publish'}>Publish</MenuItem>
+            <MenuItem value={'draft'}>Draft</MenuItem>
           </Select>
         </Box>
         <Box
@@ -132,6 +129,7 @@ const PublishCard = () => {
               <AntSwitch
                 defaultChecked
                 inputProps={{ "aria-label": "ant design" }}
+                onChange={handleToggleVisibility}
               />
               <Typography
                 fontSize={"12px"}

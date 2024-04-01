@@ -1,20 +1,37 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
+const ImagesMap = ({ item, id, setAllImages, allImages, features, standOutFeatures=false, setFeat }) => {
   const imageTag = ["Overview", "Exterior", "Interior", "Steering"];
   const [tag, setTag] = useState(imageTag[0]);
-  const [feat, setFeat] = useState(features);
+  const [title, setTitle] = useState('');
 
   const handleChange = (event) => {
     setTag(event.target.value);
+    const updatedImage = {
+      ...item,
+      tag: event.target.value
+    };
+    const updatedImages = [...allImages];
+    updatedImages[id] = updatedImage;
+    setAllImages(updatedImages);
   };
 
 
-  const handleDeleteImage = (img) => {
+  const handleDeleteImage = (img, title='') => {
     const updatedImgs = allImages.filter((upd) => upd.img !== img);
     setAllImages(updatedImgs);
+
+    if(standOutFeatures){
+    const updatedFeats = allImages.filter((upd) => upd.title !== title);
+        setFeat(updatedFeats)
+    }
   };
+
+  useEffect(() => {
+    console.log('titlr', features);
+    setTitle(features)
+  }, [features])
 
   return (
     <Box
@@ -42,10 +59,11 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
         />
       </Box>
       <Box display={"flex"} width={"40%"}>
-        {features ? (
+        {standOutFeatures ? (
+          <>
           <input
-            value={feat}
-            onChange={(e) => setFeat(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             style={{
               width: "100%",
               padding: "12px 16px",
@@ -56,6 +74,7 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
             }}
             type="text"
           />
+          </>
         ) : (
           <Select
             fullWidth
@@ -116,7 +135,7 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features }) => {
             border: "1px solid #D0D0D0",
             cursor: "pointer",
           }}
-          onClick={() => handleDeleteImage(item.img)}
+          onClick={() => handleDeleteImage(item?.img, item?.title)}
         >
           <span
             style={{ color: "#700000", fontWeight: "300" }}

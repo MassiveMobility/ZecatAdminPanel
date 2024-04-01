@@ -1,7 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const ContactDetails = () => {
+const ContactDetails = ({ data, setData }) => {
+  const handleInputChange = (event, fieldName) => {
+    const { value } = event.target;
+    setData({
+      ...data,
+      [fieldName]: value,
+    });
+  };
   return (
     <Box
       sx={{
@@ -50,6 +57,8 @@ const ContactDetails = () => {
           }}
           type="text"
           placeholder="Enter the website URL here"
+          value={data.website}
+          onChange={(e) => handleInputChange(e, "website")}
         />
       </Box>
       <Box
@@ -88,7 +97,9 @@ const ContactDetails = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter in number only"
+            placeholder="Enter phone number one"
+            value={data.phone_one}
+            onChange={(e) => handleInputChange(e, "phone_one")}
           />
         </Box>
         <Box
@@ -118,7 +129,9 @@ const ContactDetails = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter in number only"
+            placeholder="Enter phone number two"
+            value={data.phone_two}
+            onChange={(e) => handleInputChange(e, "phone_two")}
           />
         </Box>
       </Box>
@@ -157,8 +170,10 @@ const ContactDetails = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
-            placeholder="Enter in number only"
+            type="email"
+            placeholder="Enter email one"
+            value={data.email_one}
+            onChange={(e) => handleInputChange(e, "email_one")}
           />
         </Box>
         <Box
@@ -188,7 +203,9 @@ const ContactDetails = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter in number only"
+            placeholder="Enter email two"
+            value={data.email_two}
+            onChange={(e) => handleInputChange(e, "email_two")}
           />
         </Box>
       </Box>

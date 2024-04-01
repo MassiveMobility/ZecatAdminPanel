@@ -1,10 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const TagsCard = ({ variantTags = false }) => {
-  const [selectedTags, setSelectedTags] = useState([]);
+const TagsCard = ({name= "", tags = [], setTags, }) => {
   const [inputValue, setInputValue] = useState("");
-  const [filters, setFilters] = useState([]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -12,25 +10,22 @@ const TagsCard = ({ variantTags = false }) => {
 
   const handleAddTag = () => {
     if (inputValue.trim() !== "") {
-      setFilters([...filters, inputValue.trim()]);
+      setTags([...tags, inputValue.trim()]);
       setInputValue("");
     }
   };
-  console.log(inputValue);
-  console.log(filters);
 
   const handleSelectTags = (tag) => {
-    if (selectedTags.includes(tag)) {
-      const tags = selectedTags.filter((tg) => tg !== tag);
-      setSelectedTags([...tags]);
+    if (tags.includes(tag)) {
+      const tags = tags.filter((tg) => tg !== tag);
+      setTags([...tags]);
       return;
     }
-    setSelectedTags([...selectedTags, tag]);
+    setTags([...tags, tag]);
   };
 
   const handleDeleteTag = (tag) => {
-    setFilters(filters.filter((item) => item !== tag));
-    setSelectedTags(selectedTags.filter((item) => item !== tag));
+    setTags(tags.filter((item) => item !== tag));
   };
 
   return (
@@ -49,7 +44,7 @@ const TagsCard = ({ variantTags = false }) => {
           fontFamily={"mySecondFont"}
           textAlign={"start"}
         >
-          {variantTags ? "Variant Tags" : "Product Search Tags"}
+          {`${name} Tags`}
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -70,6 +65,7 @@ const TagsCard = ({ variantTags = false }) => {
               onChange={handleInputChange}
             />
             <Button
+              disabled={tags.length > 4 ? true : false}
               sx={{
                 border: "1px solid #2079FF",
                 borderRadius: "8px",
@@ -89,7 +85,7 @@ const TagsCard = ({ variantTags = false }) => {
             Separate tags with commas
           </Typography>
           <Box display={"flex"} gap={"8px"} flexWrap={"wrap"}>
-            {filters.map((item) => (
+            {tags.map((item) => (
               <Typography
                 sx={{ cursor: "pointer" }}
                 onClick={() => handleSelectTags(item)}
@@ -99,7 +95,7 @@ const TagsCard = ({ variantTags = false }) => {
                 p={"4px 16px"}
                 borderRadius={"32px"}
                 bgcolor={
-                  selectedTags.includes(item)
+                  tags.includes(item)
                     ? "rgba(132, 171, 231, 0.10);"
                     : "rgba(47, 47, 47, 0.10);"
                 }
@@ -110,7 +106,7 @@ const TagsCard = ({ variantTags = false }) => {
               >
                 {item}
 
-                {selectedTags.includes(item) ? (
+                {tags.includes(item) ? (
                   <span
                     style={{ fontWeight: "300", fontSize: "20px" }}
                     className="material-symbols-outlined"

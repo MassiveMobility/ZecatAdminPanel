@@ -1,14 +1,21 @@
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropbox from "../dropbox/Dropbox";
 import { useDropzone } from "react-dropzone";
 
-const BrandLogoCard = () => {
+const BrandLogoCard = ({data, setData}) => {
   const [files, setFiles] = useState([]);
 
   let { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     multiple: true,
   });
+
+  useEffect(() => {
+    setData({
+      ...data,
+      logo: files[0]
+    })
+  }, [files])
   return (
     <Box
       sx={{

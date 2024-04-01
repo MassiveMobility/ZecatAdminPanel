@@ -48,13 +48,23 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const VariantStatus = () => {
+const VariantStatus = ({setFormData, formData}) => {
   const [toggleState, setToggleState] = useState("ON");
 
   const handleToggleChange = () => {
     setToggleState(toggleState === "ON" ? "OFF" : "ON");
+    if(toggleState === "ON"){
+      setFormData({
+        ...formData,
+        ['public']: false,
+      })
+    }else{
+      setFormData({
+        ...formData,
+        ['public']: true,
+      })
+    }
   };
-  console.log(toggleState);
 
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>

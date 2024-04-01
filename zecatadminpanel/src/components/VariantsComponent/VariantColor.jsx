@@ -4,9 +4,8 @@ import { useDropzone } from "react-dropzone";
 import VariantColorImgMap from "./VariantColorImgMap";
 import Dropbox from "../dropbox/Dropbox";
 
-const VariantColor = () => {
+const VariantColor = ({allImages, setAllImages, setColorsAvailable}) => {
   const [overviewImage, setOverviewImage] = useState("");
-  const [allImages, setAllImages] = useState([]);
   const [colorName, setColorName] = useState("");
   const [colorCode, setColorCode] = useState("");
   const [editData, setEditData] = useState(false);
@@ -39,7 +38,11 @@ const VariantColor = () => {
         reader.readAsDataURL(file);
         reader.onload = () => {
           const imageUrl = reader.result;
-          setOverviewImage((prevImages) => [...prevImages, imageUrl]);
+          const updatedImage = {
+            img: imageUrl,
+            file: file, // Store the file content
+          };
+          setOverviewImage((prevImages) => [...prevImages, updatedImage]);
         };
       });
     }
@@ -49,12 +52,28 @@ const VariantColor = () => {
 
   useEffect(() => {
     if (overviewImage && colorCode && colorName) {
-      const obj = {
-        img: overviewImage,
-        color_name: colorName,
-        color_code: colorCode,
-      };
-      setAllImages((prevImages) => [...prevImages, obj]);
+      const updatedAllImages = [];
+      const colorDetails = [];
+      for (let i = 0; i < overviewImage.length; i++) {
+        
+         const imgObj = {
+           img: overviewImage[i].img,
+           file: overviewImage[i].file,
+           color_name: colorName,
+          color: colorCode,
+         };
+         const colorsObj = {
+          image: "",
+          color_name: colorName,
+          color: colorCode,
+        };
+
+        updatedAllImages.push(imgObj);
+        colorDetails.push(colorsObj)
+      }
+     
+      setAllImages((prevImages) => [...prevImages, ...updatedAllImages]);
+      setColorsAvailable((prevImages) => [...prevImages, ...colorDetails])
       setOverviewImage("");
       setColorName("");
       setColorCode("");
@@ -181,6 +200,7 @@ const VariantColor = () => {
                   handleEditData={handleEditData}
                   allImages={allImages}
                   setAllImages={setAllImages}
+                  setColorsAvailable={setColorsAvailable}
                 />
               );
             })}

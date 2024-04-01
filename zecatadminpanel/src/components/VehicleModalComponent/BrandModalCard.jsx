@@ -1,12 +1,28 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBrands } from "../../redux/actions/getAllBrandsSlice";
 
-const BrandModalCard = () => {
-  const [age, setAge] = useState("");
+const BrandModalCard = ({model, selectedBrand, setModel, setSelectedBrand}) => {
+  const dispatch = useDispatch();
+  const { allBrands } = useSelector((state) => state.allBrands);
+  const [availableBrands, setAvailableBrands] = useState([]);
+  
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setSelectedBrand(event.target.value);
   };
+
+  useEffect(() => {
+    dispatch(fetchBrands());
+  }, []);
+
+  useEffect(() => {
+    if (allBrands) {
+      const brands = allBrands.map((brand) => brand.name);
+      setAvailableBrands(brands);
+    }
+  }, [allBrands]);
   return (
     <Box
       sx={{
@@ -53,7 +69,7 @@ const BrandModalCard = () => {
 
           <Select
             fullWidth
-            value={age}
+            value={selectedBrand}
             onChange={handleChange}
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
@@ -69,10 +85,22 @@ const BrandModalCard = () => {
                 Select the Brand
               </em>
             </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {availableBrands.map((brand) => (
+              <MenuItem style={{textTransform: 'capitalize'}} key={brand} value={brand}>
+                {brand}
+              </MenuItem>
+            ))}
           </Select>
+
+          <Typography
+            mt={"8px"}
+            color={"#2f2f2f"}
+            fontSize={"14px"}
+            fontFamily={"myFourthFont"}
+            textAlign={"left"}
+          >
+            If your desired brand is not here, add first in brand section
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -91,6 +119,8 @@ const BrandModalCard = () => {
             Model Name
           </Typography>
           <input
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
             style={{
               height: "56px",
               padding: "12px 16px",
@@ -103,6 +133,16 @@ const BrandModalCard = () => {
             type="text"
             placeholder="Enter the model name here"
           />
+          <Typography
+            mt={"8px"}
+            color={"#2f2f2f"}
+            fontSize={"14px"}
+            fontFamily={"myFourthFont"}
+            textAlign={"left"}
+            visibility={"hidden"}
+          >
+            If your desired brand is not here, add first in brand section
+          </Typography>
         </Box>
       </Box>
     </Box>

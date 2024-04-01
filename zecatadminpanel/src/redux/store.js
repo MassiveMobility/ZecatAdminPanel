@@ -7,6 +7,8 @@ import enquirySliceReducer from "./actions/getAllEnquiriesSlice";
 import applicationSliceReducer from "./actions/getAllApplicationsSlice";
 import reviewSliceReducer from "./actions/getAllReviewsSlice";
 import createProductSliceReducer from "./actions/createProductSlice";
+import createBrandSliceReducer from "./actions/createBrandSlice";
+import createVideoSliceReducer from "./actions/createVideoSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +19,8 @@ export const store = configureStore({
     allEnquiries: enquirySliceReducer,
     allReviews: reviewSliceReducer,
     allApplications: applicationSliceReducer,
-    createProduct: createProductSliceReducer
+    createProduct: createProductSliceReducer,
+    createBrand: createBrandSliceReducer,
+    createVideo: createVideoSliceReducer,
   },
 });

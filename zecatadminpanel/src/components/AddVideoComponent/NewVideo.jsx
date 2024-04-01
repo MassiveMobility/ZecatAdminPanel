@@ -1,7 +1,15 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const NewVideo = () => {
+const NewVideo = ({ data, setData }) => {
+
+  const handleInputChange = (event, fieldName) => {
+    const { value } = event.target;
+    setData({
+      ...data,
+      [fieldName]: value,
+    });
+  };
   return (
     <Box
       sx={{
@@ -41,7 +49,9 @@ const NewVideo = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter in number only"
+            placeholder="Enter Video title here"
+            value={data.title}
+            onChange={(e) => handleInputChange(e, "title")}
           />
         </Box>
         <Box
@@ -72,7 +82,9 @@ const NewVideo = () => {
               fontFamily: "myFourthFont",
             }}
             type="text"
-            placeholder="Enter in number only"
+            placeholder="Enter url here"
+            value={data.url}
+            onChange={(e) => handleInputChange(e, "url")}
           />
         </Box>
       </Box>

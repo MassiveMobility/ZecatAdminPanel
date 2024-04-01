@@ -1,9 +1,26 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RangeSlider, InputNumber } from "rsuite";
 
-const PriceRangeCard = () => {
-  const [value, setValue] = React.useState([100, 400]);
+const PriceRangeCard = ({price, setPrice, setLow, setHigh}) => {
+  const [value, setValue] = useState([200000, 4500000]);
+
+
+  useEffect(() => {
+    setLow(value[0])
+    setHigh(value[1])
+    const formatNumber = (num) => {
+      return num.toString().replace(/(\d)(?=(\d\d)+\d$)/g, '$1,');
+  };
+
+  const low = formatNumber(value[0]);
+  const high = formatNumber(value[1]);
+
+  const range = `${low}-${high}`;
+
+   
+    setPrice(range)
+  }, [value])
 
   return (
     <Box sx={{ padding: "24px", background: "#fff", borderRadius: "12px" }}>
@@ -26,8 +43,8 @@ const PriceRangeCard = () => {
       >
         <Box>
           <InputNumber
-            min={0}
-            max={500}
+            min={200000}
+            max={4500000}
             value={value[0]}
             style={{
               width: { md: "160px", xs: "120px" },
@@ -50,8 +67,8 @@ const PriceRangeCard = () => {
         </Box>
         <Box>
           <InputNumber
-            min={0}
-            max={500}
+            min={200000}
+            max={4500000}
             value={value[1]}
             style={{
               width: { md: "160px", xs: "120px" },
@@ -73,8 +90,8 @@ const PriceRangeCard = () => {
       </Box>
       <Box sx={{ marginTop: "20px" }}>
         <RangeSlider
-          min={0}
-          max={500}
+          min={200000}
+          max={4500000}
           progress
           style={{ marginTop: 16 }}
           value={value}
@@ -90,8 +107,8 @@ const PriceRangeCard = () => {
           marginTop: "20px",
         }}
       >
-        <Typography fontFamily={"myThirdFont"}>₹0</Typography>
-        <Typography fontFamily={"myThirdFont"}>₹10,00,00,000</Typography>
+        <Typography fontFamily={"myThirdFont"}>₹2,00,000</Typography>
+        <Typography fontFamily={"myThirdFont"}>₹45,00,000</Typography>
       </Box>
     </Box>
   );

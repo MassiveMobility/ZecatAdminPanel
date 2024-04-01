@@ -1,7 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const ServiceDetail = () => {
+const ServiceDetail = ({ data, setData }) => {
+  const handleInputChange = (event, fieldName) => {
+    const { value } = event.target;
+    setData({
+      ...data,
+      [fieldName]: Number(value),
+    });
+  };
   return (
     <Box
       sx={{
@@ -56,8 +63,10 @@ const ServiceDetail = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
+            type="number"
             placeholder="Enter in number only"
+            value={data.number_of_showrooms}
+            onChange={(e) => handleInputChange(e, "number_of_showrooms")}
           />
         </Box>
         <Box
@@ -86,8 +95,10 @@ const ServiceDetail = () => {
               fontSize: "16px",
               fontFamily: "myFourthFont",
             }}
-            type="text"
+            type="number"
             placeholder="Enter in number only"
+            value={data.number_of_service_centers}
+            onChange={(e) => handleInputChange(e, "number_of_service_centers")}
           />
         </Box>
       </Box>

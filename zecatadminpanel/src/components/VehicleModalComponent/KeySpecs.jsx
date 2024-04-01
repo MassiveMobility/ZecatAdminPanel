@@ -1,23 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const KeySpecs = () => {
-  const [formData, setFormData] = useState({
-    max_power: "",
-    max_torque: "",
-    range: "",
-    battery_capacity: "",
-    top_speed: "",
-    charging_time_ac: "",
-    fast_charging: false,
-    airbags_count: "",
-  });
+const KeySpecs = ({setFormData, formData}) => {
 
   const handleInputChange = (event, fieldName) => {
     const { value } = event.target;
     setFormData({
       ...formData,
-      [fieldName]: value,
+      [fieldName]: Number(value),
     });
   };
 
@@ -29,7 +19,6 @@ const KeySpecs = () => {
     });
   };
 
-  console.log(formData);
 
   return (
     <>
@@ -112,7 +101,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.max_power}
               onChange={(e) => handleInputChange(e, "max_power")}
             />
@@ -146,7 +135,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.max_torque}
               onChange={(e) => handleInputChange(e, "max_torque")}
             />
@@ -180,7 +169,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.airbags_count}
               onChange={(e) => handleInputChange(e, "airbags_count")}
             />
@@ -214,7 +203,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.battery_capacity}
               onChange={(e) => handleInputChange(e, "battery_capacity")}
             />
@@ -248,7 +237,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.range}
               onChange={(e) => handleInputChange(e, "range")}
             />
@@ -282,7 +271,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.top_speed}
               onChange={(e) => handleInputChange(e, "top_speed")}
             />
@@ -316,7 +305,7 @@ const KeySpecs = () => {
                 height: "64px",
               }}
               placeholder="Enter Input here"
-              type="text"
+              type="number"
               value={formData.charging_time_ac}
               onChange={(e) => handleInputChange(e, "charging_time_ac")}
             />

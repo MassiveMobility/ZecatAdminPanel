@@ -6,6 +6,7 @@ import axiosInstance from "../../api/axiosInstance";
 export const createProduct = createAsyncThunk(
   "product/createProducts",
   async (details = {}) => {
+    console.log("payload", details);
     try {
       const response = await axiosInstance.post(endPoints.createProduct, details);
       const product = response.data?.data?.product || {};
@@ -18,15 +19,54 @@ export const createProduct = createAsyncThunk(
 );
 
 const initialState = {
-  product: {},
+  productDetails: {
+    variants: [],
+    product: {
+      brand: "",
+      model: "",
+      price: "",
+      lower_price_range: 0,
+      high_price_range: 0,
+      stand_out_features: [],
+      vechicle_type: 2,
+      public: true,
+      status: 'published',
+      tags: [],
+    },
+    overview_image: [],
+    exterior_image: [],
+    interior_image: [],
+    steering_image: [],
+    standout_image: [],
+    images: []
+
+  },
   loading: false,
   error: null,
 };
 
 export const createProductSlice = createSlice({
-  name: "createProducts",
+  name: "createProduct",
   initialState,
-  reducers: {},
+  reducers: {
+    setProductDetails: (state, action) => {
+      Object.entries(action.payload).forEach(([field, value]) => {
+        state.productDetails.product[field] = value;
+      });
+    },
+    setImageDetails: (state, action) => {
+      Object.entries(action.payload).forEach(([field, value]) => {
+        state.productDetails[field] = value;
+      });
+    },
+    setVariants: (state, action) => {
+        state.productDetails.variants.push(action.payload)
+    },
+    removeVariants:(state, action) => {
+      const updates =  state.productDetails.variants.filter((item) => item.name !== action.payload)
+      state.productDetails.variants = updates
+  },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createProduct.pending, (state) => {
@@ -43,6 +83,6 @@ export const createProductSlice = createSlice({
   },
 });
 
-export const {} = createProductSlice.actions;
+export const {setProductDetails, setImageDetails, setVariants, removeVariants} = createProductSlice.actions;
 
 export default createProductSlice.reducer;

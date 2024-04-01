@@ -1,17 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import BrandDetails from "../../components/AddBrandComponent/BrandDetails";
 import ServiceDetail from "../../components/AddBrandComponent/ServiceDetail";
 import ContactDetails from "../../components/AddBrandComponent/ContactDetails";
 import BrandLogoCard from "../../components/AddBrandComponent/BrandLogoCard";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createBrand } from "../../redux/actions/createBrandSlice";
 
 const AddBrand = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleAddModal = () => {
-    navigate("add_brand");
+  const [brandData, setBrandData] = useState({
+    name: "",
+    category: "",
+    established_year: "",
+    description: "",
+    number_of_showrooms: null,
+    number_of_service_centers: null,
+    website: "",
+    phone_one: "",
+    phone_two: "",
+    email_one: "",
+    email_two: "",
+    logo: null,
+  });
+
+  const handleAddBrand = () => {
+    dispatch(createBrand(brandData));
+    setBrandData({
+      name: "",
+      category: "",
+      established_year: "",
+      description: "",
+      number_of_showrooms: null,
+      number_of_service_centers: null,
+      website: "",
+      phone_one: "",
+      phone_two: "",
+      email_one: "",
+      email_two: "",
+      logo: null,
+    });
   };
+
+  useEffect(() => {
+    console.log("brand", brandData);
+  }, [brandData]);
   return (
     <Box>
       <Typography
@@ -26,9 +62,9 @@ const AddBrand = () => {
       <Grid container columnSpacing={"24px"} rowSpacing={"24px"}>
         <Grid item md={9}>
           <Box display={"flex"} flexDirection={"column"} gap={"24px"}>
-            <BrandDetails />
-            <ServiceDetail />
-            <ContactDetails />
+            <BrandDetails data={brandData} setData={setBrandData} />
+            <ServiceDetail data={brandData} setData={setBrandData} />
+            <ContactDetails data={brandData} setData={setBrandData} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 sx={{
@@ -44,7 +80,7 @@ const AddBrand = () => {
                     background: "#2079FF",
                   },
                 }}
-                onClick={handleAddModal}
+                onClick={handleAddBrand}
               >
                 ADD BRAND
               </Button>
@@ -53,7 +89,7 @@ const AddBrand = () => {
         </Grid>
 
         <Grid item md={3}>
-          <BrandLogoCard />
+          <BrandLogoCard data={brandData} setData={setBrandData} />
         </Grid>
       </Grid>
     </Box>
