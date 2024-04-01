@@ -5,16 +5,35 @@ import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { userModelData, userModelTable } from "../../constants/mapItems";
 import SearchInput from "../../components/Inputs/SearchInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../redux/actions/getAllUsersSlice";
 
 const AllUsers = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const allUsers = useSelector((state) => state.allUsers.allUsers);
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
+
+  const transformApiDataForTable = (apiData) => {
+    return apiData.map((product) => ({
+      name: product.name,
+      phone_number: product.phone_number,
+      email: product.email,
+      _id: truncateId(product._id),
+      created_at: product.createdAt,
+      action: ["delete"],
+    }));
+  };
+
+  const truncateId = (id) => {
+    return id.substring(0, 6).replace(/\W/g, "");
+  };
+
+  const transformedUserData = transformApiDataForTable(allUsers);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
@@ -114,7 +133,7 @@ const AllUsers = () => {
           >
             Showing 1-10 of 80 vehicle models
           </Typography>
-          <CustomTable headRow={userModelTable} rowData={userModelData} />
+          <CustomTable headRow={userModelTable} rowData={transformedUserData} />
         </Box>
       </Box>
     </Box>

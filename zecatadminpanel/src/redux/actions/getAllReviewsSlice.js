@@ -2,25 +2,28 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { endPoints } from "../../api/endpoint";
 
-export const fetchReviews = createAsyncThunk("product/fetchReviews", async () => {
-  try {
-    const response = await axios.get(endPoints.getAllReviews);
-    const AllReviews = response.data?.data?.comments || [];
-    console.log('ds',  AllReviews);
-    return AllReviews;
-  } catch (error) {
-    throw Error("Error fetching products: " + error.message);
+export const fetchReviews = createAsyncThunk(
+  "product/fetchReviews",
+  async () => {
+    try {
+      const response = await axios.get(endPoints.getAllReviews);
+      const allReviews = response.data?.data?.comments || [];
+      console.log("ds", allReviews);
+      return allReviews;
+    } catch (error) {
+      throw Error("Error fetching products: " + error.message);
+    }
   }
-});
+);
 
 const initialState = {
-  AllReviews: [],
+  allReviews: [],
   loading: false,
   error: null,
 };
 
 export const reviewSlice = createSlice({
-  name: "AllReviews",
+  name: "allReviews",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -30,7 +33,7 @@ export const reviewSlice = createSlice({
       })
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.loading = false;
-        state.AllReviews = action.payload;
+        state.allReviews = action.payload;
       })
       .addCase(fetchReviews.rejected, (state, action) => {
         state.loading = true;

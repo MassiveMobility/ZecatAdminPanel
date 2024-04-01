@@ -2,24 +2,27 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { endPoints } from "../../api/endpoint";
 
-export const fetchApplications = createAsyncThunk("product/fetchApplications", async () => {
-  try {
-    const response = await axios.get(endPoints.getAllApplications);
-    const AllApplications = response.data?.data || [];
-    return AllApplications;
-  } catch (error) {
-    throw Error("Error fetching products: " + error.message);
+export const fetchApplications = createAsyncThunk(
+  "product/fetchApplications",
+  async () => {
+    try {
+      const response = await axios.get(endPoints.getAllApplications);
+      const allApplications = response.data?.data || [];
+      return allApplications;
+    } catch (error) {
+      throw Error("Error fetching products: " + error.message);
+    }
   }
-});
+);
 
 const initialState = {
-    AllApplications: [],
+  allApplications: [],
   loading: false,
   error: null,
 };
 
 export const applicationSlice = createSlice({
-  name: "AllApplications",
+  name: "allApplications",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -29,7 +32,7 @@ export const applicationSlice = createSlice({
       })
       .addCase(fetchApplications.fulfilled, (state, action) => {
         state.loading = false;
-        state.AllApplications = action.payload;
+        state.allApplications = action.payload;
       })
       .addCase(fetchApplications.rejected, (state, action) => {
         state.loading = true;

@@ -5,26 +5,49 @@ import CustomTab from "../../components/CustomTabs/CustomTab";
 import SearchInput from "../../components/Inputs/SearchInput";
 import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
-import { enquiryOptions, loanModelData, loanModelTable, loanTabItems } from "../../constants/mapItems";
-import { useDispatch } from "react-redux";
+import {
+  enquiryOptions,
+  loanModelData,
+  loanModelTable,
+  loanTabItems,
+} from "../../constants/mapItems";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchApplications } from "../../redux/actions/getAllApplicationsSlice";
 
 const LoanApplicationPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
 
-  useEffect(() => {
-    dispatch(fetchApplications())
-  }, [])
- 
+  const allApplications = useSelector(
+    (state) => state.allApplications.allApplications
+  );
 
- 
-  
+  useEffect(() => {
+    dispatch(fetchApplications());
+  }, []);
+
+  const transformApiDataForTable = (apiData) => {
+    return apiData.map((product) => ({
+      _id: truncateId(product._id),
+      name: product?.user?.name,
+      phone_number: product?.user?.phone_number,
+      created_at: product.createdAt,
+      status: product.status,
+      action: ["view", "delete"],
+    }));
+  };
+
+  const truncateId = (id) => {
+    return id.substring(0, 6).replace(/\W/g, "");
+  };
+
+  const transformedLoanData = transformApiDataForTable(allApplications);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -32,7 +55,7 @@ const LoanApplicationPage = () => {
         fontSize={"clamp(1rem, 0.8962rem + 0.5031vw, 1.5rem)"}
         fontFamily={"mySecondFont"}
       >
-       LOAN APPLICATIONS
+        LOAN APPLICATIONS
       </Typography>
       <Box
         sx={{
@@ -123,9 +146,8 @@ const LoanApplicationPage = () => {
           >
             Showing 1-10 of 80 vehicle models
           </Typography>
-          <CustomTable headRow={loanModelTable} rowData={loanModelData} />
+          <CustomTable headRow={loanModelTable} rowData={transformedLoanData} />
         </Box>
-      
       </Box>
     </Box>
   );

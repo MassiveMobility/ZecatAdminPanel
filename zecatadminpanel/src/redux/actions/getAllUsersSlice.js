@@ -5,22 +5,22 @@ import { endPoints } from "../../api/endpoint";
 export const fetchUsers = createAsyncThunk("product/fetchUsers", async () => {
   try {
     const response = await axios.get(endPoints.getAllUsers);
-    const AllUsers = response.data?.data?.users || [];
-    console.log("vide", AllUsers);
-    return AllUsers;
+    const allUsers = response.data?.data?.users || [];
+    console.log("vide", allUsers);
+    return allUsers;
   } catch (error) {
     throw Error("Error fetching products: " + error.message);
   }
 });
 
 const initialState = {
-  AllUsers: [],
+  allUsers: [],
   loading: false,
   error: null,
 };
 
 export const userSlice = createSlice({
-  name: "AllUsers",
+  name: "allUsers",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -30,7 +30,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.AllUsers = action.payload;
+        state.allUsers = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = true;

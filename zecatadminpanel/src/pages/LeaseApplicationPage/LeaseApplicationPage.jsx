@@ -1,27 +1,54 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomTab from "../../components/CustomTabs/CustomTab";
-import { enquiryOptions, leaseTabItems, loanModelData, loanModelTable } from "../../constants/mapItems";
+import {
+  enquiryOptions,
+  leaseTabItems,
+  loanModelData,
+  loanModelTable,
+} from "../../constants/mapItems";
 import SearchInput from "../../components/Inputs/SearchInput";
 import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchApplications } from "../../redux/actions/getAllApplicationsSlice";
 
 const LeaseApplicationPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
 
+  const allApplications = useSelector(
+    (state) => state.allApplications.allApplications
+  );
+
   useEffect(() => {
-    dispatch(fetchApplications())
-  }, [])
+    dispatch(fetchApplications());
+  }, []);
+
+  const transformApiDataForTable = (apiData) => {
+    return apiData.map((product) => ({
+      _id: truncateId(product._id),
+      name: product?.user?.name,
+      phone_number: product?.user?.phone_number,
+      created_at: product.createdAt,
+      status: product.status,
+      action: ["view", "delete"],
+    }));
+  };
+
+  const truncateId = (id) => {
+    return id.substring(0, 6).replace(/\W/g, "");
+  };
+
+  const transformedLeaseData = transformApiDataForTable(allApplications);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -120,9 +147,11 @@ const LeaseApplicationPage = () => {
           >
             Showing 1-10 of 80 vehicle models
           </Typography>
-          <CustomTable headRow={loanModelTable} rowData={loanModelData} />
+          <CustomTable
+            headRow={loanModelTable}
+            rowData={transformedLeaseData}
+          />
         </Box>
-      
       </Box>
     </Box>
   );

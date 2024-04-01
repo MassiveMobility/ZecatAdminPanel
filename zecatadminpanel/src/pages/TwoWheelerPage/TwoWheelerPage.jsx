@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomTab from "../../components/CustomTabs/CustomTab";
 import {
@@ -16,29 +10,46 @@ import {
 import SearchInput from "../../components/Inputs/SearchInput";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import Sorting from "./Sorting";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../redux/actions/getAllProducts";
-import {useDispatch} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 
 const TwoWheelerPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
 
+  const handleAddModel = () => {
+    navigate(`add_model`);
+  };
 
-  const handleAddModel= () => {
-    navigate(`add_model`)
-  }
+  const allProducts = useSelector((state) => state.allProducts.allProducts);
 
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [])
- 
-  
+    dispatch(fetchProducts());
+  }, []);
+
+  const transformApiDataForTable = (apiData) => {
+    return apiData.map((product) => ({
+      model: product.model,
+      id: truncateId(product._id),
+      brand: product.brand,
+      variants: product.variants.map((item) => item.name),
+      status: product.status,
+      action: ["edit", "hide", "delete"],
+    }));
+  };
+
+  const truncateId = (id) => {
+    return id.substring(0, 6).replace(/\W/g, "");
+  };
+
+  const transformedData = transformApiDataForTable(allProducts);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -159,9 +170,8 @@ const TwoWheelerPage = () => {
           >
             Showing 1-10 of 80 vehicle models
           </Typography>
-          <CustomTable headRow={vehicleModelTable} rowData={vehicleModelData} />
+          <CustomTable headRow={vehicleModelTable} rowData={transformedData} />
         </Box>
-      
       </Box>
     </Box>
   );

@@ -5,21 +5,21 @@ import { endPoints } from "../../api/endpoint";
 export const fetchVideos = createAsyncThunk("product/fetchVideos", async () => {
   try {
     const response = await axios.get(endPoints.getAllVideos);
-    const AllVideos = response.data?.data || [];
-    return AllVideos;
+    const allVideos = response.data?.data || [];
+    return allVideos;
   } catch (error) {
     throw Error("Error fetching products: " + error.message);
   }
 });
 
 const initialState = {
-  AllVideos: [],
+  allVideos: [],
   loading: false,
   error: null,
 };
 
 export const videoSlice = createSlice({
-  name: "AllVideos",
+  name: "allVideos",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -29,7 +29,7 @@ export const videoSlice = createSlice({
       })
       .addCase(fetchVideos.fulfilled, (state, action) => {
         state.loading = false;
-        state.AllVideos = action.payload;
+        state.allVideos = action.payload;
       })
       .addCase(fetchVideos.rejected, (state, action) => {
         state.loading = true;

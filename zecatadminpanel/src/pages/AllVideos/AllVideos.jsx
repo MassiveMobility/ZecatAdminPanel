@@ -10,7 +10,7 @@ import {
   videoModelTable,
 } from "../../constants/mapItems";
 import { fetchVideos } from "../../redux/actions/getAllVideosSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AllVideos = () => {
   const postsTabs = addVehicleModeltabItems.filter(
@@ -18,7 +18,7 @@ const AllVideos = () => {
   );
   // const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // const handleSelectBrand = (e) => {
   //   setSelectBrand(e.target.value);
@@ -28,9 +28,25 @@ const AllVideos = () => {
     navigate(`add_videos`);
   };
 
+  const allVideos = useSelector((state) => state.allVideos.allVideos);
+
   useEffect(() => {
-    dispatch(fetchVideos())
-  }, [])
+    dispatch(fetchVideos());
+  }, []);
+
+  const transformApiDataForTable = (apiData) => {
+    return apiData.map((product) => ({
+      title: product.title,
+      category: product.category,
+      tags: product.tags,
+      date: product.createdAt,
+      action: ["edit", "hide", "delete"],
+    }));
+  };
+
+  const transformedVideoData = transformApiDataForTable(allVideos);
+  console.log(transformedVideoData);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
       <Typography
@@ -151,7 +167,10 @@ const AllVideos = () => {
           >
             Showing 1-10 of 80 vehicle models
           </Typography>
-          <CustomTable headRow={videoModelTable} rowData={videoModelData} />
+          <CustomTable
+            headRow={videoModelTable}
+            rowData={transformedVideoData}
+          />
         </Box>
       </Box>
     </Box>

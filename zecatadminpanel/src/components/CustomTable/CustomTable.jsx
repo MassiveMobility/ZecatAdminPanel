@@ -67,7 +67,7 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
     }
     setStartPage(start);
     setData(rowData.slice(start, end));
-  }, [currentPage]);
+  }, [currentPage, rowData, totalRows, view]);
   return (
     <Box>
       <TableContainer>

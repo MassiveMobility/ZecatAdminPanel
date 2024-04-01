@@ -11,21 +11,40 @@ import { useNavigate } from "react-router-dom";
 import Sorting from "../TwoWheelerPage/Sorting";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import CustomTab from "../../components/CustomTabs/CustomTab";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchEnquiries } from "../../redux/actions/getAllEnquiriesSlice";
 
 const EnquiryPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSelectBrand = (e) => {
     setSelectBrand(e.target.value);
   };
 
+  const allEnquiries = useSelector((state) => state.allEnquiries.allEnquiries);
+
   useEffect(() => {
-    dispatch(fetchEnquiries())
-  }, [])
+    dispatch(fetchEnquiries());
+  }, []);
+
+  const transformApiDataForTable = (apiData) => {
+    return apiData.map((product) => ({
+      _id: truncateId(product._id),
+      name: product?.user?.name,
+      phone_number: product?.user?.phone_number,
+      created_at: product.createdAt,
+      status: product.status,
+      action: ["view", "delete"],
+    }));
+  };
+
+  const truncateId = (id) => {
+    return id.substring(0, 6).replace(/\W/g, "");
+  };
+
+  const transformedEnquiryData = transformApiDataForTable(allEnquiries);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
@@ -125,7 +144,10 @@ const EnquiryPage = () => {
           >
             Showing 1-10 of 80 vehicle models
           </Typography>
-          <CustomTable headRow={enquiryModelTable} rowData={enquiryModelData} />
+          <CustomTable
+            headRow={enquiryModelTable}
+            rowData={transformedEnquiryData}
+          />
         </Box>
       </Box>
     </Box>
