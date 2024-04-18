@@ -9,6 +9,7 @@ import reviewSliceReducer from "./actions/getAllReviewsSlice";
 import createProductSliceReducer from "./actions/createProductSlice";
 import createBrandSliceReducer from "./actions/createBrandSlice";
 import createVideoSliceReducer from "./actions/createVideoSlice";
+import deleteDialogSliceReducer from './actions/deleteDialogSlice'
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     createProduct: createProductSliceReducer,
     createBrand: createBrandSliceReducer,
     createVideo: createVideoSliceReducer,
+    openDeleteDialog: deleteDialogSliceReducer
   },
 });

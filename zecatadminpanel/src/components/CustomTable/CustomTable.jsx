@@ -12,8 +12,13 @@ import {
   styled,
   tableCellClasses,
 } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { endPoints } from "../../api/endpoint";
+import DeleteDialog from "../DialogBox/DeleteDialog";
+import { setOpen } from "../../redux/actions/deleteDialogSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,11 +44,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CustomTable = ({ headRow, rowData, view = 5 }) => {
+const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
   const [endPage, setEndPage] = useState();
   const [startPage, setStartPage] = useState();
+  const [prodId, setProdId] = useState('')
+  const [endpoint, setEndpoint] = useState('')
+  
+  const dispatch = useDispatch() 
+
+  const {open} = useSelector(state => state.openDeleteDialog)
+
+  const handleClose = () => {
+    dispatch(setOpen(false))
+  }
 
   const totalRows = rowData.length;
   const totalPages = Math.ceil(totalRows / view);
@@ -57,6 +72,11 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
     navigate("enquiry_details");
   };
 
+  const openDeleteDialog = (prodId) => {
+    dispatch(setOpen(true))
+    setProdId(prodId)
+  }
+
   useEffect(() => {
     const end = view * currentPage;
     const start = end - view;
@@ -68,8 +88,26 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
     setStartPage(start);
     setData(rowData.slice(start, end));
   }, [currentPage, rowData, totalRows, view]);
+
+  useEffect(() => {
+    if(document === 'brand'){
+      setEndpoint(endPoints.createBrand)
+    }else if(document === 'product'){
+      setEndpoint(endPoints.deleteProduct)
+    }
+  }, [])
   return (
     <Box>
+        <Typography
+            mt={"12px"}
+            mb={"8px !important"}
+            color={"#2f2f2f"}
+            fontSize={"14px"}
+            fontFamily={"myFourthFont"}
+            textAlign={"left"}
+          >
+            {` Showing ${startPage}-${endPage} of ${rowData.length} vehicle`}
+          </Typography>
       <TableContainer>
         <Table>
           <TableHead>
@@ -178,6 +216,7 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
                                 sx={{
                                   cursor: "pointer",
                                 }}
+                                onClick={() => openDeleteDialog(row?.id)}
                               >
                                 <span
                                   style={{
@@ -308,6 +347,8 @@ const CustomTable = ({ headRow, rowData, view = 5 }) => {
           />
         </Box>
       </Box>
+      <DeleteDialog open={open} onClose={handleClose} productId={prodId} endpoint={endpoint}/>
+
     </Box>
   );
 };

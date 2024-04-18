@@ -1,5 +1,5 @@
-const BASE_URL_V1 = "http://localhost:5000/api/v1/";
-const BASE_URL_V2 = "http://localhost:5000/api/v2/";
+const BASE_URL_V1 = "http://13.127.86.204:5000/api/v1/";
+const BASE_URL_V2 = "http://13.127.86.204:5000/api/v2/";
 
 const PRODUCT_ROUTE = BASE_URL_V2 + "product/";
 const BRAND_ROUTE = BASE_URL_V2 + "brand/";
@@ -19,5 +19,6 @@ export const endPoints = {
   getAllUsers: USER_ROUTE,
   getAllEnquiries: ENQUIRY_ROUTE,
   getAllApplications: EXPLORE_ROUTE,
-  getAllReviews: COMMENT_ROUTE
+  getAllReviews: COMMENT_ROUTE,
+  deleteProduct: PRODUCT_ROUTE + "delete/"
 };

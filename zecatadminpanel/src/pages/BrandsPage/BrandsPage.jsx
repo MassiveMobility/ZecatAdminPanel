@@ -35,16 +35,17 @@ const BrandsPage = () => {
   const transformApiDataForTable = (apiData) => {
     return apiData.map((product) => ({
       brand: product.name,
-      id: truncateId(product._id),
+      // id: truncateId(product._id),
+      id: product._id,
       category: product.category,
       total: product.number_of_products,
       action: ["edit", "hide", "delete"],
     }));
   };
 
-  const truncateId = (id) => {
-    return id.substring(0, 6).replace(/\W/g, "");
-  };
+  // const truncateId = (id) => {
+  //   return id.substring(0, 6).replace(/\W/g, "");
+  // };
 
   const transformedBrandData = transformApiDataForTable(allBrands);
 
@@ -157,17 +158,9 @@ const BrandsPage = () => {
 
         {/*---------------------------------------- TABLE --------------------------------------------- */}
         <Box>
-          <Typography
-            mt={"12px"}
-            mb={"8px !important"}
-            color={"#2f2f2f"}
-            fontSize={"14px"}
-            fontFamily={"myFourthFont"}
-            textAlign={"left"}
-          >
-            Showing 1-10 of 80 vehicle models
-          </Typography>
+          
           <CustomTable
+            document="brand"
             headRow={brandModelTable}
             rowData={transformedBrandData}
           />

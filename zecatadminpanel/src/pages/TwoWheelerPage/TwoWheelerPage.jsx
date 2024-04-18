@@ -36,7 +36,8 @@ const TwoWheelerPage = () => {
   const transformApiDataForTable = (apiData) => {
     return apiData.map((product) => ({
       model: product.model,
-      id: truncateId(product._id),
+      // id: truncateId(product._id),
+      id: product._id,
       brand: product.brand,
       variants: product.variants.map((item) => item.name),
       status: product.status,
@@ -44,11 +45,13 @@ const TwoWheelerPage = () => {
     }));
   };
 
-  const truncateId = (id) => {
-    return id.substring(0, 6).replace(/\W/g, "");
-  };
+  // const truncateId = (id) => {
+  //   return id.substring(0, 6).replace(/\W/g, "");
+  // };
 
   const transformedData = transformApiDataForTable(allProducts);
+
+
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
@@ -160,17 +163,8 @@ const TwoWheelerPage = () => {
 
         {/*---------------------------------------- TABLE --------------------------------------------- */}
         <Box>
-          <Typography
-            mt={"12px"}
-            mb={"8px !important"}
-            color={"#2f2f2f"}
-            fontSize={"14px"}
-            fontFamily={"myFourthFont"}
-            textAlign={"left"}
-          >
-            Showing 1-10 of 80 vehicle models
-          </Typography>
-          <CustomTable headRow={vehicleModelTable} rowData={transformedData} />
+        
+          <CustomTable document="product" headRow={vehicleModelTable} rowData={transformedData} />
         </Box>
       </Box>
     </Box>
