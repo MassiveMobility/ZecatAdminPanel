@@ -53,6 +53,7 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
   const [endpoint, setEndpoint] = useState('')
   
   const dispatch = useDispatch() 
+  const navigate = useNavigate()
 
   const {open} = useSelector(state => state.openDeleteDialog)
 
@@ -67,7 +68,6 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
     setCurrentPage(page);
   };
 
-  const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("enquiry_details");
   };
@@ -75,6 +75,10 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
   const openDeleteDialog = (prodId) => {
     dispatch(setOpen(true))
     setProdId(prodId)
+  }
+
+  const handleEditItem = (prodId) => {
+      
   }
 
   useEffect(() => {
@@ -173,6 +177,7 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
                                 sx={{
                                   cursor: "pointer",
                                 }}
+                                onClick={() => handleEditItem(row?.id)}
                               >
                                 <span
                                   class="material-symbols-outlined"
