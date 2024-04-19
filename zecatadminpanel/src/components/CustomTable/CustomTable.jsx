@@ -49,17 +49,17 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
   const [data, setData] = useState([]);
   const [endPage, setEndPage] = useState();
   const [startPage, setStartPage] = useState();
-  const [prodId, setProdId] = useState('')
-  const [endpoint, setEndpoint] = useState('')
-  
-  const dispatch = useDispatch() 
-  const navigate = useNavigate()
+  const [prodId, setProdId] = useState("");
+  const [endpoint, setEndpoint] = useState("");
 
-  const {open} = useSelector(state => state.openDeleteDialog)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { open } = useSelector((state) => state.openDeleteDialog);
 
   const handleClose = () => {
-    dispatch(setOpen(false))
-  }
+    dispatch(setOpen(false));
+  };
 
   const totalRows = rowData.length;
   const totalPages = Math.ceil(totalRows / view);
@@ -73,13 +73,15 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
   };
 
   const openDeleteDialog = (prodId) => {
-    dispatch(setOpen(true))
-    setProdId(prodId)
-  }
+    dispatch(setOpen(true));
+    setProdId(prodId);
+  };
 
   const handleEditItem = (prodId) => {
-      
-  }
+    navigate(`edit_model`, {
+      state: { prodId },
+    });
+  };
 
   useEffect(() => {
     const end = view * currentPage;
@@ -94,24 +96,24 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
   }, [currentPage, rowData, totalRows, view]);
 
   useEffect(() => {
-    if(document === 'brand'){
-      setEndpoint(endPoints.createBrand)
-    }else if(document === 'product'){
-      setEndpoint(endPoints.deleteProduct)
+    if (document === "brand") {
+      setEndpoint(endPoints.createBrand);
+    } else if (document === "product") {
+      setEndpoint(endPoints.deleteProduct);
     }
-  }, [])
+  }, []);
   return (
     <Box>
-        <Typography
-            mt={"12px"}
-            mb={"8px !important"}
-            color={"#2f2f2f"}
-            fontSize={"14px"}
-            fontFamily={"myFourthFont"}
-            textAlign={"left"}
-          >
-            {` Showing ${startPage}-${endPage} of ${rowData.length} vehicle`}
-          </Typography>
+      <Typography
+        mt={"12px"}
+        mb={"8px !important"}
+        color={"#2f2f2f"}
+        fontSize={"14px"}
+        fontFamily={"myFourthFont"}
+        textAlign={"left"}
+      >
+        {` Showing ${startPage}-${endPage} of ${rowData.length} vehicle`}
+      </Typography>
       <TableContainer>
         <Table>
           <TableHead>
@@ -352,8 +354,12 @@ const CustomTable = ({ headRow, rowData, view = 5, document = "" }) => {
           />
         </Box>
       </Box>
-      <DeleteDialog open={open} onClose={handleClose} productId={prodId} endpoint={endpoint}/>
-
+      <DeleteDialog
+        open={open}
+        onClose={handleClose}
+        productId={prodId}
+        endpoint={endpoint}
+      />
     </Box>
   );
 };

@@ -1,37 +1,44 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-const ImagesMap = ({ item, id, setAllImages, allImages, features, standOutFeatures=false, setFeat }) => {
+const ImagesMap = ({
+  item,
+  id,
+  setAllImages,
+  allImages,
+  features,
+  standOutFeatures = false,
+  setFeat,
+}) => {
   const imageTag = ["Overview", "Exterior", "Interior", "Steering"];
-  const [tag, setTag] = useState(imageTag[0]);
-  const [title, setTitle] = useState('');
+  const [tag, setTag] = useState(item?.tag || imageTag[0]);
+  const [title, setTitle] = useState("");
 
   const handleChange = (event) => {
     setTag(event.target.value);
     const updatedImage = {
       ...item,
-      tag: event.target.value
+      tag: event.target.value,
     };
     const updatedImages = [...allImages];
     updatedImages[id] = updatedImage;
     setAllImages(updatedImages);
   };
 
-
-  const handleDeleteImage = (img, title='') => {
+  const handleDeleteImage = (img, title = "") => {
     const updatedImgs = allImages.filter((upd) => upd.img !== img);
     setAllImages(updatedImgs);
 
-    if(standOutFeatures){
-    const updatedFeats = allImages.filter((upd) => upd.title !== title);
-        setFeat(updatedFeats)
+    if (standOutFeatures) {
+      const updatedFeats = allImages.filter((upd) => upd.title !== title);
+      setFeat(updatedFeats);
     }
   };
 
   useEffect(() => {
-    console.log('titlr', features);
-    setTitle(features)
-  }, [features])
+    console.log("titlr", features);
+    setTitle(features);
+  }, [features]);
 
   return (
     <Box
@@ -61,19 +68,19 @@ const ImagesMap = ({ item, id, setAllImages, allImages, features, standOutFeatur
       <Box display={"flex"} width={"40%"}>
         {standOutFeatures ? (
           <>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "12px 16px",
-              borderRadius: "8px",
-              border: "1px solid rgba(47, 47, 47, 0.25)",
-              outline: "none",
-              height: "64px",
-            }}
-            type="text"
-          />
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                borderRadius: "8px",
+                border: "1px solid rgba(47, 47, 47, 0.25)",
+                outline: "none",
+                height: "64px",
+              }}
+              type="text"
+            />
           </>
         ) : (
           <Select

@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeVariants } from "../../redux/actions/createProductSlice";
 
-const AddVariantCard = () => {
+const AddVariantCard = ({ variants = [] }) => {
   const { productDetails } = useSelector((state) => state.createProduct);
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleVisibility = (index) => {
     // const newVisibilityStates = [...visibilityStates];
@@ -17,12 +17,12 @@ const AddVariantCard = () => {
   };
 
   const handleAddVariant = () => {
-    navigate('add_variant')
-  }
+    navigate("add_variant");
+  };
 
   const handleRemoveVariant = (name) => {
-    dispatch(removeVariants(name))
-  }
+    dispatch(removeVariants(name));
+  };
   return (
     <Box
       sx={{
@@ -119,6 +119,7 @@ const AddVariantCard = () => {
         }}
       >
         {productDetails?.variants?.map((item, index) => {
+          // {variants?.map((item, index) => {
           return (
             <Box
               sx={{
@@ -222,13 +223,11 @@ const AddVariantCard = () => {
                       visibility
                     </span>
                   ) : ( */}
-                    <span class="material-symbols-outlined">
-                      visibility_off
-                    </span>
+                  <span class="material-symbols-outlined">visibility_off</span>
                   {/* )} */}
                 </Box>
                 <Box
-                onClick={() => handleRemoveVariant(item?.name)}
+                  onClick={() => handleRemoveVariant(item?.name)}
                   sx={{
                     display: "flex",
                     alignItems: "center",

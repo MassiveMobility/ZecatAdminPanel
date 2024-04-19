@@ -8,7 +8,10 @@ export const createProduct = createAsyncThunk(
   async (details = {}) => {
     console.log("payload", details);
     try {
-      const response = await axiosInstance.post(endPoints.createProduct, details);
+      const response = await axiosInstance.post(
+        endPoints.createProduct,
+        details
+      );
       const product = response.data?.data?.product || {};
 
       return product;
@@ -30,7 +33,7 @@ const initialState = {
       stand_out_features: [],
       vechicle_type: 2,
       public: true,
-      status: 'published',
+      status: "published",
       tags: [],
     },
     overview_image: [],
@@ -38,8 +41,7 @@ const initialState = {
     interior_image: [],
     steering_image: [],
     standout_image: [],
-    images: []
-
+    images: [],
   },
   loading: false,
   error: null,
@@ -60,12 +62,18 @@ export const createProductSlice = createSlice({
       });
     },
     setVariants: (state, action) => {
-        state.productDetails.variants.push(action.payload)
+      state.productDetails.variants.push(action.payload);
     },
-    removeVariants:(state, action) => {
-      const updates =  state.productDetails.variants.filter((item) => item.name !== action.payload)
-      state.productDetails.variants = updates
-  },
+    removeVariants: (state, action) => {
+      const updates = state.productDetails.variants.filter(
+        (item) => item.name !== action.payload
+      );
+      state.productDetails.variants = updates;
+    },
+    // this is for edited product
+    addProductVariants: (state, action) => {
+      state.productDetails.variants = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -83,6 +91,12 @@ export const createProductSlice = createSlice({
   },
 });
 
-export const {setProductDetails, setImageDetails, setVariants, removeVariants} = createProductSlice.actions;
+export const {
+  setProductDetails,
+  setImageDetails,
+  setVariants,
+  removeVariants,
+  addProductVariants,
+} = createProductSlice.actions;
 
 export default createProductSlice.reducer;

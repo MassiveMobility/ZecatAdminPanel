@@ -12,12 +12,15 @@ import TagsCard from "../../components/VehicleModalComponent/TagsCard";
 import DeleteModalCard from "../../components/VehicleModalComponent/DeleteModalCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addProductVariants,
   createProduct,
   setImageDetails,
   setProductDetails,
 } from "../../redux/actions/createProductSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useScrollToTop from "../../Hooks/useScrollToTop";
+import axios from "axios";
+import { endPoints } from "../../api/endpoint";
 
 const AddTwoWheeler = () => {
   const { productDetails, loading } = useSelector(
@@ -42,6 +45,9 @@ const AddTwoWheeler = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const editProdId = location.state?.prodId;
 
   useEffect(() => {
     dispatch(
@@ -100,6 +106,70 @@ const AddTwoWheeler = () => {
   const handleCreateProduct = () => {
     dispatch(createProduct(productDetails));
   };
+
+  useEffect(() => {
+    if (editProdId) {
+      (async () => {
+        try {
+          const { data } = await axios.get(
+            endPoints.getProductById + editProdId
+          );
+          const product = data?.data?.product;
+          setBrand(product?.brand);
+          setModel(product?.model);
+          setLowPrice(product?.lower_price_range);
+          setHighPrice(product?.high_price_range);
+          setStatus(product?.status);
+          setPublicMode(product?.public);
+          setTags(product?.tags);
+          dispatch(addProductVariants(product?.variants));
+          const allImages = handleEditProdImages(
+            product?.overview_image,
+            product?.interior_image,
+            product?.exterior_image,
+            product?.steering_image
+          );
+          setImages(allImages);
+          console.log("imggg", allImages);
+          console.log("edited product", data?.data?.product);
+        } catch (error) {
+          console.log("error", error);
+        }
+      })();
+    }
+  }, [editProdId]);
+
+  const handleEditProdImages = (overview, interior, exterior, steering) => {
+    let allImages = [];
+    overview.forEach((item) => {
+      allImages.push({
+        img: item,
+        tag: "Overview",
+      });
+    });
+    interior.forEach((item) => {
+      allImages.push({
+        img: item,
+        tag: "Interior",
+      });
+    });
+    exterior.forEach((item) => {
+      allImages.push({
+        img: item,
+        tag: "Exterior",
+      });
+    });
+    steering.forEach((item) => {
+      allImages.push({
+        img: item,
+        tag: "Steering",
+      });
+    });
+
+    return allImages;
+  };
+
+  // console.log("loc", location.state?.prodId);
 
   return (
     <>

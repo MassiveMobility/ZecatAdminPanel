@@ -20,5 +20,6 @@ export const endPoints = {
   getAllEnquiries: ENQUIRY_ROUTE,
   getAllApplications: EXPLORE_ROUTE,
   getAllReviews: COMMENT_ROUTE,
-  deleteProduct: PRODUCT_ROUTE + "delete/"
+  deleteProduct: PRODUCT_ROUTE + "delete/",
+  getProductById: PRODUCT_ROUTE + "get/",
 };
