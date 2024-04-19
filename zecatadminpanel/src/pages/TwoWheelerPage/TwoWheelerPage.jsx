@@ -13,9 +13,11 @@ import Sorting from "./Sorting";
 import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../redux/actions/getAllProducts";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchBrands } from "../../redux/actions/getAllBrandsSlice";
 
 const TwoWheelerPage = () => {
   const [selectBrand, setSelectBrand] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,13 +35,20 @@ const TwoWheelerPage = () => {
     dispatch(fetchProducts());
   }, []);
 
+  useEffect(() => {
+    dispatch(fetchBrands());
+  }, []);
+
+  const { allBrands } = useSelector((state) => state.allBrands);
+  console.log(allBrands);
+
   const transformApiDataForTable = (apiData) => {
     return apiData.map((product) => ({
       model: product.model,
       // id: truncateId(product._id),
       id: product._id,
       brand: product.brand,
-      variants: product.variants.map((item) => item.name),
+      variants: product.variants.map((item) => item.name + "," + " "),
       status: product.status,
       action: ["edit", "hide", "delete"],
     }));
@@ -50,8 +59,6 @@ const TwoWheelerPage = () => {
   // };
 
   const transformedData = transformApiDataForTable(allProducts);
-
-
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
@@ -129,9 +136,9 @@ const TwoWheelerPage = () => {
                     All Brands
                   </em>
                 </MenuItem>
-                {allBrands.map((brand) => (
-                  <MenuItem value={brand.label}>
-                    <Typography p={"12px"}>{brand.label}</Typography>
+                {allBrands?.map((brand) => (
+                  <MenuItem value={brand._id}>
+                    <Typography p={"12px"}>{brand.name}</Typography>
                   </MenuItem>
                 ))}
               </Select>
@@ -163,8 +170,11 @@ const TwoWheelerPage = () => {
 
         {/*---------------------------------------- TABLE --------------------------------------------- */}
         <Box>
-        
-          <CustomTable document="product" headRow={vehicleModelTable} rowData={transformedData} />
+          <CustomTable
+            document="product"
+            headRow={vehicleModelTable}
+            rowData={transformedData}
+          />
         </Box>
       </Box>
     </Box>
